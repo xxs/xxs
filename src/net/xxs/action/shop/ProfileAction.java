@@ -17,7 +17,6 @@ import net.xxs.service.MemberAttributeService;
 import net.xxs.service.MemberService;
 import net.xxs.util.StringUtil;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.InterceptorRef;

@@ -27,7 +27,6 @@ import net.xxs.util.CaptchaUtil;
 import net.xxs.util.JsonUtil;
 import net.xxs.util.StringUtil;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.struts2.convention.annotation.ParentPackage;

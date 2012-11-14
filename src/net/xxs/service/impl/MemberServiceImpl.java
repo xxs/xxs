@@ -15,7 +15,6 @@ import net.xxs.service.MemberService;
 import net.xxs.util.CommonUtil;
 import net.xxs.util.StringUtil;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

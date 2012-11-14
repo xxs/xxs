@@ -177,7 +177,7 @@
 												<#list specification.specificationValueList as specificationValue>
 													<#if specificationValueSet.contains(specificationValue)>
 														<li class="${specificationValue.id}" title="${specificationValue.name}" specificationValueId="${specificationValue.id}">
-															${specificationValue.name}
+															${specificationValue.name}qq
 															<span title="点击取消选择"></span>
 														</li>
 													</#if>
@@ -215,6 +215,12 @@
 								<#if setting.scoreType == "goodsSet" && goods.score != 0>
 									&nbsp;&nbsp;( 所得积分: ${goods.score} )
 								</#if>
+							</td>
+						</tr>
+						<tr>
+							<th>确认金额:</th>
+							<td>
+								<span id="price1" class="price">${goods.price?string(currencyFormat)}</span>
 							</td>
 						</tr>
 						<tr>
@@ -395,6 +401,7 @@
 	
 		$productSn = $("#productSn");
 		$price = $("#price");
+		$price1 = $("#price1");
 		$marketPrice = $("#marketPrice");
 		$buyInfo = $("#buyInfo");
 		$tipsTitle = $("#tipsTitle");
@@ -473,6 +480,7 @@
 					if (arrayEqual(specificationValueDatas[i], specificationValueSelecteds)) {
 						$productSn = $productSn.text(productDatas[i].productSn);
 						$price = $price.text(productDatas[i].price);
+						$price1 = $price1.text(productDatas[i].price);
 						$marketPrice = $marketPrice.text(productDatas[i].marketPrice);
 						selectedProductId = i;
 						$buyInfo.removeClass("highlight");
