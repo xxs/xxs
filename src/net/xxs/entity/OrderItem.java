@@ -24,10 +24,12 @@ public class OrderItem extends BaseEntity {
 	
 	private String productSn;// 商品货号
 	private String productName;// 商品名称
-	private BigDecimal productPrice;// 商品价格
+	private BigDecimal productPrice;// 商品价格（面额）
 	private Integer productQuantity;// 商品数量
 	private Integer deliveryQuantity;// 发货数量
 	private String goodsHtmlPath;// 商品HTML静态文件路径
+	private String cardNum;//卡号
+	private String cardPwd;//密码
 	
 	private Order order;// 订单
 	private Product product;// 商品
@@ -113,5 +115,20 @@ public class OrderItem extends BaseEntity {
 		BigDecimal subtotalPrice = productPrice.multiply(new BigDecimal(productQuantity.toString()));
 		return SettingUtil.setPriceScale(subtotalPrice);
 	}
-	
+	@Column(nullable = false, updatable = false)
+	public String getCardNum() {
+		return cardNum;
+	}
+
+	public void setCardNum(String cardNum) {
+		this.cardNum = cardNum;
+	}
+	@Column(nullable = false, updatable = false)
+	public String getCardPwd() {
+		return cardPwd;
+	}
+
+	public void setCardPwd(String cardPwd) {
+		this.cardPwd = cardPwd;
+	}
 }

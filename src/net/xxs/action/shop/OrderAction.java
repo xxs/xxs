@@ -69,6 +69,8 @@ public class OrderAction extends BaseShopAction {
 	private Integer totalScore;// 总积分
 	private String memo;// 附言
 	
+	private String productSn;//商品编码
+	
 	private Receiver receiver;// 其它收货地址
 	private DeliveryType deliveryType;// 配送方式
 	private PaymentConfig paymentConfig;// 支付方式
@@ -299,7 +301,160 @@ public class OrderAction extends BaseShopAction {
 		
 		return "result";
 	}
-	
+	//保存提交的充值卡订单
+	@InputConfig(resultName = "error")
+	public String saveCard() {
+		Setting setting = getSetting();
+		Member loginMember = getLoginMember();
+		cartItemSet = loginMember.getCartItemSet();
+		if (cartItemSet == null || cartItemSet.size() == 0) {
+			addActionError("购物车目前没有加入任何商品!");
+			return ERROR;
+		}
+		if (StringUtils.isNotEmpty(receiver.getId())) {
+			receiver = receiverService.load(receiver.getId());
+		} else {
+			if (StringUtils.isEmpty(receiver.getName())) {
+				addActionError("收货人不允许为空!");
+				return ERROR;
+			}
+			if (StringUtils.isEmpty(areaId)) {
+				addActionError("地区不允许为空!");
+				return ERROR;
+			}
+			if (StringUtils.isEmpty(receiver.getAddress())) {
+				addActionError("联系地址不允许为空!");
+				return ERROR;
+			}
+			if (StringUtils.isEmpty(receiver.getZipCode())) {
+				addActionError("邮编不允许为空!");
+				return ERROR;
+			}
+			if (StringUtils.isEmpty(receiver.getPhone()) && StringUtils.isEmpty(receiver.getMobile())) {
+				addActionError("联系电话、联系手机必须填写其中一项!");
+				return ERROR;
+			}
+			if (isSaveReceiver == null) {
+				addActionError("是否保存不允许为空!");
+				return ERROR;
+			}
+			if (isSaveReceiver) {
+				Area area = areaService.get(areaId);
+				if (area == null) {
+					addActionError("请选择收货地区!");
+					return ERROR;
+				}
+				
+				receiver.setArea(area);
+				receiver.setIsDefault(false);
+				receiver.setMember(loginMember);
+				receiverService.save(receiver);
+			}
+		}
+		for (CartItem cartItem : cartItemSet) {
+			Product product = cartItem.getProduct();
+			if (product.getStore() != null && (cartItem.getQuantity() + product.getFreezeStore() > product.getStore())) {
+				addActionError("商品[" + product.getName() + "]库存不足!");
+				return ERROR;
+			}
+		}
+		
+		deliveryType = deliveryTypeService.load(deliveryType.getId());
+		if (deliveryType.getDeliveryMethod() == DeliveryMethod.deliveryAgainstPayment && (paymentConfig == null || StringUtils.isEmpty(paymentConfig.getId()))) {
+			addActionError("请选择支付方式!");
+			return ERROR;
+		}
+		
+		totalProductQuantity = 0;
+		totalProductWeight = 0;
+		totalProductPrice = new BigDecimal(0);
+		for (CartItem cartItem : cartItemSet) {
+			Product product = cartItem.getProduct();
+			totalProductQuantity += cartItem.getQuantity();
+			totalProductPrice = cartItem.getProduct().getPreferentialPrice(loginMember).multiply(new BigDecimal(cartItem.getQuantity())).add(totalProductPrice);
+			totalProductWeight += product.getWeight() * cartItem.getQuantity();
+			cartItemService.delete(cartItem);
+		}
+		totalProductPrice = SettingUtil.setPriceScale(totalProductPrice);
+		BigDecimal deliveryFee = deliveryType.getDeliveryFee(totalProductWeight);
+		
+		String paymentConfigName = null;
+		BigDecimal paymentFee = null;
+		if (deliveryType.getDeliveryMethod() == DeliveryMethod.deliveryAgainstPayment) {
+			paymentConfig = paymentConfigService.load(paymentConfig.getId());
+			paymentConfigName = paymentConfig.getName();
+			paymentFee = paymentConfig.getPaymentFee(totalProductPrice.add(deliveryFee));
+		} else {
+			paymentConfig = null;
+			paymentConfigName = "货到付款";
+			paymentFee = new BigDecimal(0);
+		}
+		
+		BigDecimal totalAmount = totalProductPrice.add(deliveryFee).add(paymentFee);
+		
+		order = new Order();
+		order.setOrderStatus(OrderStatus.unprocessed);
+		order.setPaymentStatus(PaymentStatus.unpaid);
+		order.setShippingStatus(ShippingStatus.unshipped);
+		order.setDeliveryTypeName(deliveryType.getName());
+		order.setPaymentConfigName(paymentConfigName);
+		order.setTotalProductQuantity(totalProductQuantity);
+		order.setTotalProductWeight(totalProductWeight);
+		order.setTotalProductPrice(totalProductPrice);
+		order.setDeliveryFee(deliveryFee);
+		order.setPaymentFee(paymentFee);
+		order.setTotalAmount(totalAmount);
+		order.setPaidAmount(new BigDecimal(0));
+		order.setShipName(receiver.getName());
+		order.setShipArea(receiver.getArea());
+		order.setShipAddress(receiver.getAddress());
+		order.setShipZipCode(receiver.getZipCode());
+		order.setShipPhone(receiver.getPhone());
+		order.setShipMobile(receiver.getMobile());
+		order.setMemo(memo);
+		order.setMember(loginMember);
+		order.setDeliveryType(deliveryType);
+		order.setPaymentConfig(paymentConfig);
+		orderService.save(order);
+		
+		// 订单项
+		for (CartItem cartItem : cartItemSet) {
+			Product product = cartItem.getProduct();
+			Goods goods = product.getGoods();
+			OrderItem orderItem = new OrderItem();
+			orderItem.setProductSn(product.getProductSn());
+			orderItem.setProductName(product.getName());
+			orderItem.setProductPrice(product.getPreferentialPrice(loginMember));
+			orderItem.setProductQuantity(cartItem.getQuantity());
+			orderItem.setDeliveryQuantity(0);
+			orderItem.setGoodsHtmlPath(goods.getHtmlPath());
+			orderItem.setOrder(order);
+			orderItem.setProduct(product);
+			orderItemService.save(orderItem);
+		}
+		
+		// 库存处理
+		if (setting.getStoreFreezeTime() == StoreFreezeTime.order) {
+			for (CartItem cartItem : cartItemSet) {
+				Product product = cartItem.getProduct();
+				if (product.getStore() != null) {
+					product.setFreezeStore(product.getFreezeStore() + cartItem.getQuantity());
+					productService.update(product);
+				}
+			}
+		}
+		
+		// 订单日志
+		OrderLog orderLog = new OrderLog();
+		orderLog.setOrderLogType(OrderLogType.create);
+		orderLog.setOrderSn(order.getOrderSn());
+		orderLog.setOperator(null);
+		orderLog.setInfo(null);
+		orderLog.setOrder(order);
+		orderLogService.save(orderLog);
+		
+		return "result";
+	}
 	// 订单列表
 	public String list() {
 		pager = orderService.getOrderPager(getLoginMember(), pager);
@@ -434,6 +589,14 @@ public class OrderAction extends BaseShopAction {
 
 	public void setCartItemSet(Set<CartItem> cartItemSet) {
 		this.cartItemSet = cartItemSet;
+	}
+
+	public String getProductSn() {
+		return productSn;
+	}
+
+	public void setProductSn(String productSn) {
+		this.productSn = productSn;
 	}
 
 }

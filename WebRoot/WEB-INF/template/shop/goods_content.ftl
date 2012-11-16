@@ -254,7 +254,7 @@
 						<tr>
 							<th></th>
 							<td>
-								<input type="button"  value="生成订单" />
+								<input type="button" class="addCartItemButton"  value="生成订单" />
 							</td>
 						</tr>
 						<tr>
