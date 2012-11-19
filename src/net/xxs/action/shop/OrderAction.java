@@ -69,7 +69,10 @@ public class OrderAction extends BaseShopAction {
 	private Integer totalScore;// 总积分
 	private String memo;// 附言
 	
-	private String productSn;//商品编码
+	private String productId;//商品编码
+	private String cardNum;//卡号
+	private String cardPwd;//密码
+	private String cardString;//卡密组的字符串
 	
 	private Receiver receiver;// 其它收货地址
 	private DeliveryType deliveryType;// 配送方式
@@ -304,78 +307,14 @@ public class OrderAction extends BaseShopAction {
 	//保存提交的充值卡订单
 	@InputConfig(resultName = "error")
 	public String saveCard() {
-		Setting setting = getSetting();
 		Member loginMember = getLoginMember();
+		Product product = productService.load(productId);
 		receiver = receiverService.load("4028bc743ab4e741013ab5390ed60007");//默认设置一个收获地址
-//		cartItemSet = loginMember.getCartItemSet();
-//		if (cartItemSet == null || cartItemSet.size() == 0) {
-//			addActionError("购物车目前没有加入任何商品!");
-//			return ERROR;
-//		}
-//		if (StringUtils.isNotEmpty(receiver.getId())) {
-//			receiver = receiverService.load(receiver.getId());
-//		} else {
-//			if (StringUtils.isEmpty(receiver.getName())) {
-//				addActionError("收货人不允许为空!");
-//				return ERROR;
-//			}
-//			if (StringUtils.isEmpty(areaId)) {
-//				addActionError("地区不允许为空!");
-//				return ERROR;
-//			}
-//			if (StringUtils.isEmpty(receiver.getAddress())) {
-//				addActionError("联系地址不允许为空!");
-//				return ERROR;
-//			}
-//			if (StringUtils.isEmpty(receiver.getZipCode())) {
-//				addActionError("邮编不允许为空!");
-//				return ERROR;
-//			}
-//			if (StringUtils.isEmpty(receiver.getPhone()) && StringUtils.isEmpty(receiver.getMobile())) {
-//				addActionError("联系电话、联系手机必须填写其中一项!");
-//				return ERROR;
-//			}
-//			if (isSaveReceiver == null) {
-//				addActionError("是否保存不允许为空!");
-//				return ERROR;
-//			}
-//			if (isSaveReceiver) {
-//				Area area = areaService.get(areaId);
-//				if (area == null) {
-//					addActionError("请选择收货地区!");
-//					return ERROR;
-//				}
-//				
-//				receiver.setArea(area);
-//				receiver.setIsDefault(false);
-//				receiver.setMember(loginMember);
-//				receiverService.save(receiver);
-//			}
-//		}
-//		for (CartItem cartItem : cartItemSet) {
-//			Product product = cartItem.getProduct();
-//			if (product.getStore() != null && (cartItem.getQuantity() + product.getFreezeStore() > product.getStore())) {
-//				addActionError("商品[" + product.getName() + "]库存不足!");
-//				return ERROR;
-//			}
-//		}
 		deliveryType = deliveryTypeService.load("8a8f81d93afa3e77013afa5526f80000");
-//		deliveryType = deliveryTypeService.load(deliveryType.getId());
-//		if (deliveryType.getDeliveryMethod() == DeliveryMethod.deliveryAgainstPayment && (paymentConfig == null || StringUtils.isEmpty(paymentConfig.getId()))) {
-//			addActionError("请选择支付方式!");
-//			return ERROR;
-//		}
-		
 		totalProductQuantity = 0;
 		totalProductWeight = 0;
-		totalProductPrice = new BigDecimal(0);
-		for (CartItem cartItem : cartItemSet) {
-			Product product = cartItem.getProduct();
-			totalProductQuantity += cartItem.getQuantity();
-			totalProductPrice = cartItem.getProduct().getPreferentialPrice(loginMember).multiply(new BigDecimal(cartItem.getQuantity())).add(totalProductPrice);
-			totalProductWeight += product.getWeight() * cartItem.getQuantity();
-			cartItemService.delete(cartItem);
-		}
+		totalProductPrice = product.getPrice();
+
 		totalProductPrice = SettingUtil.setPriceScale(totalProductPrice);
 		BigDecimal deliveryFee = deliveryType.getDeliveryFee(totalProductWeight);
 		
@@ -419,31 +358,19 @@ public class OrderAction extends BaseShopAction {
 		orderService.save(order);
 		
 		// 订单项
-		for (CartItem cartItem : cartItemSet) {
-			Product product = cartItem.getProduct();
-			Goods goods = product.getGoods();
-			OrderItem orderItem = new OrderItem();
-			orderItem.setProductSn(product.getProductSn());
-			orderItem.setProductName(product.getName());
-			orderItem.setProductPrice(product.getPreferentialPrice(loginMember));
-			orderItem.setProductQuantity(cartItem.getQuantity());
-			orderItem.setDeliveryQuantity(0);
-			orderItem.setGoodsHtmlPath(goods.getHtmlPath());
-			orderItem.setOrder(order);
-			orderItem.setProduct(product);
-			orderItemService.save(orderItem);
-		}
-		
-		// 库存处理
-		if (setting.getStoreFreezeTime() == StoreFreezeTime.order) {
-			for (CartItem cartItem : cartItemSet) {
-				Product product = cartItem.getProduct();
-				if (product.getStore() != null) {
-					product.setFreezeStore(product.getFreezeStore() + cartItem.getQuantity());
-					productService.update(product);
-				}
-			}
-		}
+		Goods goods = product.getGoods();
+		OrderItem orderItem = new OrderItem();
+		orderItem.setProductSn(product.getProductSn());
+		orderItem.setProductName(product.getName());//货品名称
+		orderItem.setProductPrice(product.getPrice());//价格默认为销售价
+		orderItem.setProductQuantity(1);//数量默认为1
+		orderItem.setDeliveryQuantity(0);//发货数量默认为0
+		orderItem.setGoodsHtmlPath(goods.getHtmlPath());
+		orderItem.setOrder(order);
+		orderItem.setProduct(product);
+		orderItem.setCardNum("11111111");//卡号
+		orderItem.setCardPwd("22222222");//密码
+		orderItemService.save(orderItem);
 		
 		// 订单日志
 		OrderLog orderLog = new OrderLog();
@@ -592,12 +519,37 @@ public class OrderAction extends BaseShopAction {
 		this.cartItemSet = cartItemSet;
 	}
 
-	public String getProductSn() {
-		return productSn;
+
+	public String getProductId() {
+		return productId;
 	}
 
-	public void setProductSn(String productSn) {
-		this.productSn = productSn;
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getCardNum() {
+		return cardNum;
+	}
+
+	public void setCardNum(String cardNum) {
+		this.cardNum = cardNum;
+	}
+
+	public String getCardPwd() {
+		return cardPwd;
+	}
+
+	public void setCardPwd(String cardPwd) {
+		this.cardPwd = cardPwd;
+	}
+
+	public String getCardString() {
+		return cardString;
+	}
+
+	public void setCardString(String cardString) {
+		this.cardString = cardString;
 	}
 
 }

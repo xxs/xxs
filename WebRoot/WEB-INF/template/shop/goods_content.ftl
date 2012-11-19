@@ -124,11 +124,12 @@
 						<a class="next browse" href="javascript: void(0);" hidefocus></a>
 					</div>
 				</div>
+				<form action="order!saveCard.action" method="post">
 				<div class="goodsTopRight">
 					<h1 class="title">${substring(goods.name, 50, "...")}</h1>
 					<ul class="goodsAttribute">
 						<li>商品编号: ${goods.goodsSn}</li>
-						<li>货品编号: <span id="productSn">${goods.defaultProduct.productSn}</span></li>
+						<li>货品编号: <span id="productSn">${goods.defaultProduct.productSn}</span><input type="text" name="productId" value="${goods.defaultProduct.id}" /></li>
 						<#list (goods.goodsType.goodsAttributeSet)! as goodsAttribute>
 							<#if goods.getGoodsAttributeValue(goodsAttribute)?? && goods.getGoodsAttributeValue(goodsAttribute) != "">
 	                    		<li>${goodsAttribute.name}: ${substring(goods.getGoodsAttributeValue(goodsAttribute), 26)}</li>
@@ -154,6 +155,7 @@
 						</div>
 					</div>
 					<div class="blank"></div>
+					
 					<table id="buyInfo" class="buyInfo">
 						<#if goods.isSpecificationEnabled>
 							<#assign specificationValueSet = goods.specificationValueSet>
@@ -247,14 +249,14 @@
 						<tr>
 							<th>支付途径:</th>
 							<td>
-								<input type="radio" name="444" />易宝支付
+								<input type="radio" name="444" />易宝支付<input type="text" name="paymentConfig.id" value="4028bc743ab4e741013ab538ee9c0006" />
 								<input type="radio" name="444" />拉卡支付
 							</td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>
-								<input type="button" class="addCartItemButton"  value="生成订单" />
+								<input type="submit" value="生成订单" />
 							</td>
 						</tr>
 						<tr>
@@ -270,6 +272,7 @@
 							</td>
 						</tr>
 					</table>
+					</form>
 				</div>
 			</div>
 			<div class="blank"></div>
