@@ -306,64 +306,65 @@ public class OrderAction extends BaseShopAction {
 	public String saveCard() {
 		Setting setting = getSetting();
 		Member loginMember = getLoginMember();
-		cartItemSet = loginMember.getCartItemSet();
-		if (cartItemSet == null || cartItemSet.size() == 0) {
-			addActionError("购物车目前没有加入任何商品!");
-			return ERROR;
-		}
-		if (StringUtils.isNotEmpty(receiver.getId())) {
-			receiver = receiverService.load(receiver.getId());
-		} else {
-			if (StringUtils.isEmpty(receiver.getName())) {
-				addActionError("收货人不允许为空!");
-				return ERROR;
-			}
-			if (StringUtils.isEmpty(areaId)) {
-				addActionError("地区不允许为空!");
-				return ERROR;
-			}
-			if (StringUtils.isEmpty(receiver.getAddress())) {
-				addActionError("联系地址不允许为空!");
-				return ERROR;
-			}
-			if (StringUtils.isEmpty(receiver.getZipCode())) {
-				addActionError("邮编不允许为空!");
-				return ERROR;
-			}
-			if (StringUtils.isEmpty(receiver.getPhone()) && StringUtils.isEmpty(receiver.getMobile())) {
-				addActionError("联系电话、联系手机必须填写其中一项!");
-				return ERROR;
-			}
-			if (isSaveReceiver == null) {
-				addActionError("是否保存不允许为空!");
-				return ERROR;
-			}
-			if (isSaveReceiver) {
-				Area area = areaService.get(areaId);
-				if (area == null) {
-					addActionError("请选择收货地区!");
-					return ERROR;
-				}
-				
-				receiver.setArea(area);
-				receiver.setIsDefault(false);
-				receiver.setMember(loginMember);
-				receiverService.save(receiver);
-			}
-		}
-		for (CartItem cartItem : cartItemSet) {
-			Product product = cartItem.getProduct();
-			if (product.getStore() != null && (cartItem.getQuantity() + product.getFreezeStore() > product.getStore())) {
-				addActionError("商品[" + product.getName() + "]库存不足!");
-				return ERROR;
-			}
-		}
-		
-		deliveryType = deliveryTypeService.load(deliveryType.getId());
-		if (deliveryType.getDeliveryMethod() == DeliveryMethod.deliveryAgainstPayment && (paymentConfig == null || StringUtils.isEmpty(paymentConfig.getId()))) {
-			addActionError("请选择支付方式!");
-			return ERROR;
-		}
+		receiver = receiverService.load("4028bc743ab4e741013ab5390ed60007");//默认设置一个收获地址
+//		cartItemSet = loginMember.getCartItemSet();
+//		if (cartItemSet == null || cartItemSet.size() == 0) {
+//			addActionError("购物车目前没有加入任何商品!");
+//			return ERROR;
+//		}
+//		if (StringUtils.isNotEmpty(receiver.getId())) {
+//			receiver = receiverService.load(receiver.getId());
+//		} else {
+//			if (StringUtils.isEmpty(receiver.getName())) {
+//				addActionError("收货人不允许为空!");
+//				return ERROR;
+//			}
+//			if (StringUtils.isEmpty(areaId)) {
+//				addActionError("地区不允许为空!");
+//				return ERROR;
+//			}
+//			if (StringUtils.isEmpty(receiver.getAddress())) {
+//				addActionError("联系地址不允许为空!");
+//				return ERROR;
+//			}
+//			if (StringUtils.isEmpty(receiver.getZipCode())) {
+//				addActionError("邮编不允许为空!");
+//				return ERROR;
+//			}
+//			if (StringUtils.isEmpty(receiver.getPhone()) && StringUtils.isEmpty(receiver.getMobile())) {
+//				addActionError("联系电话、联系手机必须填写其中一项!");
+//				return ERROR;
+//			}
+//			if (isSaveReceiver == null) {
+//				addActionError("是否保存不允许为空!");
+//				return ERROR;
+//			}
+//			if (isSaveReceiver) {
+//				Area area = areaService.get(areaId);
+//				if (area == null) {
+//					addActionError("请选择收货地区!");
+//					return ERROR;
+//				}
+//				
+//				receiver.setArea(area);
+//				receiver.setIsDefault(false);
+//				receiver.setMember(loginMember);
+//				receiverService.save(receiver);
+//			}
+//		}
+//		for (CartItem cartItem : cartItemSet) {
+//			Product product = cartItem.getProduct();
+//			if (product.getStore() != null && (cartItem.getQuantity() + product.getFreezeStore() > product.getStore())) {
+//				addActionError("商品[" + product.getName() + "]库存不足!");
+//				return ERROR;
+//			}
+//		}
+		deliveryType = deliveryTypeService.load("8a8f81d93afa3e77013afa5526f80000");
+//		deliveryType = deliveryTypeService.load(deliveryType.getId());
+//		if (deliveryType.getDeliveryMethod() == DeliveryMethod.deliveryAgainstPayment && (paymentConfig == null || StringUtils.isEmpty(paymentConfig.getId()))) {
+//			addActionError("请选择支付方式!");
+//			return ERROR;
+//		}
 		
 		totalProductQuantity = 0;
 		totalProductWeight = 0;
