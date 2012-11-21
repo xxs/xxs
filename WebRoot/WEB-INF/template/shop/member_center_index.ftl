@@ -19,9 +19,105 @@
 		DD_belatedPNG.fix(".belatedPNG");
 	</script>
 <![endif]-->
+<#include "/WEB-INF/template/shop/head.ftl">
 </head>
 <body class="memberCenter">
 	<#include "/WEB-INF/template/shop/header.ftl">
+	  <!-- START small_banner -->
+      <section class="small_banner">
+         <div class="center-wrap">
+            <p class="page-banner-heading">会员中心首页</p>
+            <p class="page-banner-description">This area is super easy to customize. It can include a search bar, custom text or absolutely nothing at all.</p>
+            
+            <div class="breadcrumbs">
+            	<a href="#">首页</a> &rarr; <a href="page-template-homepage-lightbox-hero.html">会员中心</a> &rarr; <span class="current_crumb">Left Nav </span>
+            </div>
+            <!-- END breadcrumbs -->
+         </div>
+         <!-- END center-wrap -->
+         
+         <div class="shadow top"></div>
+         <div class="shadow bottom"></div>
+         <div class="tt-overlay"></div>
+      </section>
+      
+	<section id="content-container" class="clearfix">
+         <div id="main-wrap" class="clearfix">
+            <aside class="subnav_cont sidebar">
+               <div class="subnav">
+                  <ul>
+                     <li><a href="member_center!index.action"><span>会员中心首页</span></a></li>
+                     <@goods_list type="hot" count=10; goodsList>
+									<#if (goodsList?size > 0)>
+										<#list goodsList as goods>
+											<li><a href="${base}${goods.htmlPath}"><span>${substring(goods.name, 24, "...")}   &rarr;   点击卖卡</span></a></li>		
+										</#list>
+									</#if>
+								</@goods_list>
+                     <li><a href="page-template-homepage-jquery-sidebar.html"><span>Homepage &#8211; jQuery Sidebar</span></a></li>
+                     <li class="has_subnav">
+                        <a href="page-template-gallery-4-columns.html"><span>Image + Video Galleries  &rarr;</span></a>
+                        <ul>
+                           <li><a href="page-template-gallery-4-columns.html"><span>Gallery &#8211; 4 Columns</span></a></li>
+                           <li><a href="page-template-gallery-3-columns.html"><span>Gallery &#8211; 3 Columns</span></a></li>
+                           <li><a href="page-template-gallery-2-columns.html"><span>Gallery &#8211; 2 Columns</span></a></li>
+                           <li><a href="page-template-gallery-portrait-4-columns.html"><span>Gallery &#8211; 4 Column Portraits</span></a></li>
+                           <li><a href="page-template-gallery-portrait-3-columns.html"><span>Gallery &#8211; 3 Column Portrtaits</span></a></li>
+                        </ul>
+                     </li>
+                     <li><a href="page-template-contact.html"><span>Contact</span></a></li>
+                  </ul>
+               </div>
+               <!-- END subnav -->
+            </aside>
+            <div class="page_content_right sub-content">
+                 <!-- START tabs_type_2 --> 
+		         <dl class="tabs_type_2">
+		            <dt class="current">单张支付</dt>
+		            <dd class="current">
+		               <p>面额：<input type="radio" name="1"/>100元
+		               			<input type="radio" name="1"/>50元
+		               			<input type="radio" name="1"/>30元
+		               			<input type="radio" name="1"/>20元
+		               			<input type="radio" name="1"/>10元
+		               	</p>
+		               <p>账号：<input type="text"/></p>
+		               <p>密码：<input type="text"/></p>
+		               <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="small green button" target="_self"> 确认提交 </a>
+		               <a href="#" class="small white button" target="_self"> 重新填写 </a>	
+		               </p>
+		            </dd>
+		            
+		            
+		            <dt>多张同面额</dt>
+		            <dd class="current">
+		               <p>每行卡信息支持格式为：“卡号,密码,金额” 或者 “卡号 密码 金额”</p>
+		               <p>例如：11925110103023132,111387516814561221 或者 11925110103023132 111387516814561221</p>
+		               <p><textarea name="comments" cols="40" rows="3" id="comments"></textarea></p>
+		               <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="small green button" target="_self"> 确认提交 </a>
+		               <a href="#" class="small white button" target="_self"> 重新填写 </a>	
+		               </p>
+		            </dd>
+		            
+		            <dt>多张不同面额</dt>
+		            <dd class="current">
+		               <p>每行卡信息支持格式为：“卡号,密码,金额” 或者 “卡号 密码 金额”</p>
+		               <p>例如：11925110103023132,111387516814561221,10 或者 11925110103023132 111387516814561221 10</p>
+		               <p><textarea name="comments" cols="40" rows="3" id="comments"></textarea></p>
+		               <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="small green button" target="_self"> 确认提交 </a>
+		               <a href="#" class="small white button" target="_self"> 重新填写 </a>	
+		               </p>
+		            </dd>
+		            
+		         </dl>
+		         <!-- END tabs_type_2 --> 
+            </div>
+            <!-- END of page_content-->
+         </div>
+         <!-- END main-wrap -->
+      </section>
+      <!-- END content-container -->
+	
 	<div class="body memberCenterIndex">
 		<div class="bodyLeft">
 			<div class="memberInfo">
@@ -178,5 +274,9 @@
 	</div>
 	<div class="blank"></div>
 	<#include "/WEB-INF/template/shop/footer.ftl">
+	  <script type="text/javascript" src="${base}/template/xxs/js/custom-main.js"></script>
+      <script type="text/javascript" src="${base}/template/xxs/js/jquery.prettyPhoto.js"></script>
+      <script type="text/javascript" src="${base}/template/xxs/js/jquery.cycle.all.min.js"></script>
+      <script type="text/javascript" src="${base}/template/xxs/js/jquery.easing.1.3.js"></script>
 </body>
 </html>
