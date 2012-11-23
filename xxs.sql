@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50154
 File Encoding         : 65001
 
-Date: 2012-11-22 17:25:05
+Date: 2012-11-23 16:28:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,7 @@ CREATE TABLE `xx_admin` (
 -- ----------------------------
 -- Records of xx_admin
 -- ----------------------------
-INSERT INTO `xx_admin` VALUES ('0731dcsoft2010031200000000000017', '2011-01-01 00:00:00', '2012-11-22 10:25:54', '技术部', 'admin@shopxx.net', '', '', '', '', null, '2012-11-22 10:25:54', '0', '127.0.0.1', 'ADMIN', '21232f297a57a5a743894a0e4a801fc3', 'admin');
+INSERT INTO `xx_admin` VALUES ('0731dcsoft2010031200000000000017', '2011-01-01 00:00:00', '2012-11-23 15:19:17', '技术部', 'admin@shopxx.net', '', '', '', '', null, '2012-11-23 15:19:17', '0', '127.0.0.1', 'ADMIN', '21232f297a57a5a743894a0e4a801fc3', 'admin');
 
 -- ----------------------------
 -- Table structure for `xx_admin_role`
@@ -876,7 +876,7 @@ CREATE TABLE `xx_member` (
 INSERT INTO `xx_member` VALUES ('4028bc743ab48628013ab4b892a00000', '2012-10-31 10:48:46', '2012-11-14 22:58:06', null, null, null, '698.64000', '123@qq.com', '0', '', '', null, '2012-11-14 22:58:06', '0', '127.0.0.1', '111111111', null, null, null, null, null, null, null, null, null, null, null, null, '建设银行', null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '57', '112233', null, '0731dcsoft2010031200000000000010', 'xiaduoer');
 INSERT INTO `xx_member` VALUES ('4028bc743abf206b013abf27afae0000', '2012-11-02 11:26:20', '2012-11-02 11:42:34', null, null, '2012-11-22 00:00:00', '3060.00000', '123456@qq.com', '0', '', '', null, '2012-11-02 11:26:51', '0', '127.0.0.1', '24312341234', null, null, null, null, null, null, null, null, null, null, null, null, '建设银行', null, null, null, null, null, null, null, '123456', '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '5000', '123456', null, '402881833054c381013054d0bf800002', 'xiaduoer');
 INSERT INTO `xx_member` VALUES ('8a9182e13ab73c9e013ab74780e80000', '2012-10-31 22:44:07', '2012-11-10 14:44:41', null, null, null, '202.15000', 'xiaduoer@163.com', null, '', '', null, '2012-11-10 14:40:29', '2', '127.0.0.1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '0', 'xiaduoer', null, '402881833054c381013054d0bf800002', 'xiaduoer');
-INSERT INTO `xx_member` VALUES ('8a9183a93a92e6de013a931577bb0000', '2012-10-24 22:03:08', '2012-11-22 10:56:56', '123', null, '2012-10-17 00:00:00', '200693.91000', '123@qq.com', '0', '', '', null, '2012-11-22 10:56:56', '0', '127.0.0.1', '7878467486@qq.com', '北京市', null, null, null, null, null, null, null, null, null, null, '张成', '建设银行', '西单支行', null, null, null, null, null, '123', '111', '4297f44b13955235245b2497399d7a93', '1352095466484_5d10233c974145cd86d898a4afe84087a4e4d2896be046b250cc3ddabae55217', '123', '127.0.0.1', null, null, '123', '123123', '123', '0731dcsoft2010031200000000000010', 'xiaduoer');
+INSERT INTO `xx_member` VALUES ('8a9183a93a92e6de013a931577bb0000', '2012-10-24 22:03:08', '2012-11-23 15:19:31', '123', null, '2012-10-17 00:00:00', '200693.91000', '123@qq.com', '0', '', '', null, '2012-11-23 15:19:31', '0', '127.0.0.1', '7878467486@qq.com', '北京市', null, null, null, null, null, null, null, null, null, null, '张成', '建设银行', '西单支行', null, null, null, null, null, '123', '111', '4297f44b13955235245b2497399d7a93', '1352095466484_5d10233c974145cd86d898a4afe84087a4e4d2896be046b250cc3ddabae55217', '123', '127.0.0.1', null, null, '123', '123123', '123', '0731dcsoft2010031200000000000010', 'xiaduoer');
 INSERT INTO `xx_member` VALUES ('8a9183f63ad5735c013ad581e48f0000', '2012-11-06 19:36:30', '2012-11-06 19:36:30', null, null, null, '0.00000', '12333@qq.com', null, '', '', null, '2012-11-06 19:36:30', '0', '127.0.0.1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '0', '7777', null, '402881833054c381013054d0bf800002', 'xiaduoer');
 
 -- ----------------------------

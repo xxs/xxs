@@ -21,10 +21,10 @@
 		DD_belatedPNG.fix(".belatedPNG");
 	</script>
 <![endif]-->
-<#include "/WEB-INF/template/shop/head.ftl">
+<#include "/WEB-INF/template/shop/member_head.ftl">
 </head>
 <body class="memberCenter">
-	<#include "/WEB-INF/template/shop/header.ftl">
+	<#include "/WEB-INF/template/shop/member_header.ftl">
 		<section id="content-container" class="clearfix">
          <div id="main-wrap" class="clearfix">
             <aside class="subnav_cont sidebar">

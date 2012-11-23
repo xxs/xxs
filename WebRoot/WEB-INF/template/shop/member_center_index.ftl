@@ -19,10 +19,10 @@
 		DD_belatedPNG.fix(".belatedPNG");
 	</script>
 <![endif]-->
-<#include "/WEB-INF/template/shop/head.ftl">
+<#include "/WEB-INF/template/shop/member_head.ftl">
 </head>
 <body class="memberCenter">
-	<#include "/WEB-INF/template/shop/header.ftl">
+	<#include "/WEB-INF/template/shop/member_header.ftl">
 	  <!-- START small_banner -->
       <section class="small_banner">
          <div class="center-wrap">
@@ -43,33 +43,7 @@
       
 	<section id="content-container" class="clearfix">
          <div id="main-wrap" class="clearfix">
-            <aside class="subnav_cont sidebar">
-               <div class="subnav">
-                  <ul>
-                     <li><a href="member_center!index.action"><span>会员中心首页</span></a></li>
-                     <@goods_list type="hot" count=10; goodsList>
-									<#if (goodsList?size > 0)>
-										<#list goodsList as goods>
-											<li><a href="${base}${goods.htmlPath}"><span>${substring(goods.name, 24, "...")}   &rarr;   点击卖卡</span></a></li>		
-										</#list>
-									</#if>
-								</@goods_list>
-                     <li><a href="page-template-homepage-jquery-sidebar.html"><span>Homepage &#8211; jQuery Sidebar</span></a></li>
-                     <li class="has_subnav">
-                        <a href="page-template-gallery-4-columns.html"><span>Image + Video Galleries  &rarr;</span></a>
-                        <ul>
-                           <li><a href="page-template-gallery-4-columns.html"><span>Gallery &#8211; 4 Columns</span></a></li>
-                           <li><a href="page-template-gallery-3-columns.html"><span>Gallery &#8211; 3 Columns</span></a></li>
-                           <li><a href="page-template-gallery-2-columns.html"><span>Gallery &#8211; 2 Columns</span></a></li>
-                           <li><a href="page-template-gallery-portrait-4-columns.html"><span>Gallery &#8211; 4 Column Portraits</span></a></li>
-                           <li><a href="page-template-gallery-portrait-3-columns.html"><span>Gallery &#8211; 3 Column Portrtaits</span></a></li>
-                        </ul>
-                     </li>
-                     <li><a href="page-template-contact.html"><span>Contact</span></a></li>
-                  </ul>
-               </div>
-               <!-- END subnav -->
-            </aside>
+            <#include "/WEB-INF/template/shop/member_left_info.ftl">
             <div class="page_content_right sub-content">
                  <!-- START tabs_type_2 --> 
 		         <dl class="tabs_type_2">
