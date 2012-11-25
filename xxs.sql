@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50154
 File Encoding         : 65001
 
-Date: 2012-11-23 16:28:08
+Date: 2012-11-25 11:05:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,7 @@ CREATE TABLE `xx_admin` (
 -- ----------------------------
 -- Records of xx_admin
 -- ----------------------------
-INSERT INTO `xx_admin` VALUES ('0731dcsoft2010031200000000000017', '2011-01-01 00:00:00', '2012-11-23 15:19:17', '技术部', 'admin@shopxx.net', '', '', '', '', null, '2012-11-23 15:19:17', '0', '127.0.0.1', 'ADMIN', '21232f297a57a5a743894a0e4a801fc3', 'admin');
+INSERT INTO `xx_admin` VALUES ('0731dcsoft2010031200000000000017', '2011-01-01 00:00:00', '2012-11-25 10:14:35', '技术部', 'xxs@163.com', '', '', '', '', null, '2012-11-25 10:14:35', '0', '192.168.60.225', 'ADMIN', '21232f297a57a5a743894a0e4a801fc3', 'admin');
 
 -- ----------------------------
 -- Table structure for `xx_admin_role`
@@ -782,34 +782,10 @@ INSERT INTO `xx_log` VALUES ('4028bc743ac000ea013ac00c08b60001', '2012-11-02 15:
 INSERT INTO `xx_log` VALUES ('4028e3373b17db72013b17eaf0180002', '2012-11-19 17:06:11', '2012-11-19 17:06:11', 'net.xxs.action.admin.GoodsAction', 'save', '添加商品: 盛大一卡通', '127.0.0.1', '添加商品', 'admin');
 INSERT INTO `xx_log` VALUES ('8a8f83943ab198ff013ab1e97f1a0000', '2012-10-30 21:43:20', '2012-10-30 21:43:20', 'net.xxs.action.admin.ArticleAction', 'update', '编辑文章: 收卡价格', '127.0.0.1', '编辑文章', 'admin');
 INSERT INTO `xx_log` VALUES ('8a8f83943ab198ff013ab1e9ae360001', '2012-10-30 21:43:32', '2012-10-30 21:43:32', 'net.xxs.action.admin.ArticleAction', 'update', '编辑文章: 联系我们', '127.0.0.1', '编辑文章', 'admin');
-INSERT INTO `xx_log` VALUES ('8a9182c23a8df958013a8e48c7ff0000', '2012-10-23 23:41:07', '2012-10-23 23:41:07', 'net.shopxx.action.admin.SettingAction', 'update', null, '127.0.0.1', '系统设置', 'admin');
 INSERT INTO `xx_log` VALUES ('8a9182e13ab666b7013ab6acda4f000a', '2012-10-31 19:55:12', '2012-10-31 19:55:12', 'net.xxs.action.admin.OrderAction', 'shipping', '订单编号: DD100003', '127.0.0.1', '订单发货', 'admin');
 INSERT INTO `xx_log` VALUES ('8a9182e13ab666b7013ab6aced5c000c', '2012-10-31 19:55:17', '2012-10-31 19:55:17', 'net.xxs.action.admin.OrderAction', 'completed', '订单编号: DD100003', '127.0.0.1', '订单完成', 'admin');
 INSERT INTO `xx_log` VALUES ('8a9183a93a92e6de013a93157cbe0002', '2012-10-24 22:03:09', '2012-10-24 22:03:09', 'net.xxs.action.admin.MemberAction', 'save', '添加会员: 123123', '127.0.0.1', '添加会员', 'admin');
 INSERT INTO `xx_log` VALUES ('8a9183a93a92e6de013a932f60de0005', '2012-10-24 22:31:26', '2012-10-24 22:31:26', 'net.xxs.action.admin.SettingAction', 'update', null, '127.0.0.1', '系统设置', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88b9dd8d0016', '2012-10-22 21:46:53', '2012-10-22 21:46:53', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 腾讯一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88ba84150018', '2012-10-22 21:47:35', '2012-10-22 21:47:35', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 盛大一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bab04b0019', '2012-10-22 21:47:47', '2012-10-22 21:47:47', 'net.shopxx.action.admin.GoodsCategoryAction', 'update', '更新商品分类: 盛大一卡通', '127.0.0.1', '编辑商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bafeea001b', '2012-10-22 21:48:07', '2012-10-22 21:48:07', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 骏网一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bb56b2001d', '2012-10-22 21:48:29', '2012-10-22 21:48:29', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 完美一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bbaafc001f', '2012-10-22 21:48:51', '2012-10-22 21:48:51', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 搜狐一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bc12970021', '2012-10-22 21:49:17', '2012-10-22 21:49:17', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 征途一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bc70310023', '2012-10-22 21:49:41', '2012-10-22 21:49:41', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 久游一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bccf990025', '2012-10-22 21:50:06', '2012-10-22 21:50:06', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 网易一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bd53ac0027', '2012-10-22 21:50:40', '2012-10-22 21:50:40', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 电信充值卡', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bdb1630029', '2012-10-22 21:51:04', '2012-10-22 21:51:04', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 联通充值卡', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88be0ae4002b', '2012-10-22 21:51:26', '2012-10-22 21:51:26', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 纵游一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88be646f002d', '2012-10-22 21:51:49', '2012-10-22 21:51:49', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 天宏一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88beb512002f', '2012-10-22 21:52:10', '2012-10-22 21:52:10', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 天下通一卡通', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88bf0b860031', '2012-10-22 21:52:32', '2012-10-22 21:52:32', 'net.shopxx.action.admin.GoodsCategoryAction', 'save', '添加商品分类: 移动充值卡', '127.0.0.1', '添加商品分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88d36186003b', '2012-10-22 22:14:45', '2012-10-22 22:14:45', 'net.shopxx.action.admin.GoodsAction', 'save', '添加商品: 腾讯一卡通', '127.0.0.1', '添加商品', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88d40149003c', '2012-10-22 22:15:26', '2012-10-22 22:15:26', 'net.shopxx.action.admin.GoodsAction', 'update', '编辑商品: 腾讯一卡通', '127.0.0.1', '编辑商品', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88d60804003d', '2012-10-22 22:17:39', '2012-10-22 22:17:39', 'net.shopxx.action.admin.GoodsAction', 'update', '编辑商品: 腾讯一卡通', '127.0.0.1', '编辑商品', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88dd55c90042', '2012-10-22 22:25:37', '2012-10-22 22:25:37', 'net.shopxx.action.admin.ArticleCategoryAction', 'save', '添加文章分类: 新手上路', '127.0.0.1', '添加文章分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88ddb6e70044', '2012-10-22 22:26:02', '2012-10-22 22:26:02', 'net.shopxx.action.admin.ArticleCategoryAction', 'save', '添加文章分类: 名臣公益', '127.0.0.1', '添加文章分类', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88de91410046', '2012-10-22 22:26:58', '2012-10-22 22:26:58', 'net.shopxx.action.admin.ArticleAction', 'save', '添加文章: 交易保障', '127.0.0.1', '添加文章', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88e145690049', '2012-10-22 22:29:55', '2012-10-22 22:29:55', 'net.shopxx.action.admin.ArticleAction', 'save', '添加文章: 联系我们', '127.0.0.1', '添加文章', 'admin');
-INSERT INTO `xx_log` VALUES ('8ae4839c3a887878013a88e38b6a004b', '2012-10-22 22:32:24', '2012-10-22 22:32:24', 'net.shopxx.action.admin.ArticleAction', 'save', '添加文章: 收卡价格', '127.0.0.1', '添加文章', 'admin');
 
 -- ----------------------------
 -- Table structure for `xx_member`
@@ -876,7 +852,7 @@ CREATE TABLE `xx_member` (
 INSERT INTO `xx_member` VALUES ('4028bc743ab48628013ab4b892a00000', '2012-10-31 10:48:46', '2012-11-14 22:58:06', null, null, null, '698.64000', '123@qq.com', '0', '', '', null, '2012-11-14 22:58:06', '0', '127.0.0.1', '111111111', null, null, null, null, null, null, null, null, null, null, null, null, '建设银行', null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '57', '112233', null, '0731dcsoft2010031200000000000010', 'xiaduoer');
 INSERT INTO `xx_member` VALUES ('4028bc743abf206b013abf27afae0000', '2012-11-02 11:26:20', '2012-11-02 11:42:34', null, null, '2012-11-22 00:00:00', '3060.00000', '123456@qq.com', '0', '', '', null, '2012-11-02 11:26:51', '0', '127.0.0.1', '24312341234', null, null, null, null, null, null, null, null, null, null, null, null, '建设银行', null, null, null, null, null, null, null, '123456', '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '5000', '123456', null, '402881833054c381013054d0bf800002', 'xiaduoer');
 INSERT INTO `xx_member` VALUES ('8a9182e13ab73c9e013ab74780e80000', '2012-10-31 22:44:07', '2012-11-10 14:44:41', null, null, null, '202.15000', 'xiaduoer@163.com', null, '', '', null, '2012-11-10 14:40:29', '2', '127.0.0.1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '0', 'xiaduoer', null, '402881833054c381013054d0bf800002', 'xiaduoer');
-INSERT INTO `xx_member` VALUES ('8a9183a93a92e6de013a931577bb0000', '2012-10-24 22:03:08', '2012-11-23 15:19:31', '123', null, '2012-10-17 00:00:00', '200693.91000', '123@qq.com', '0', '', '', null, '2012-11-23 15:19:31', '0', '127.0.0.1', '7878467486@qq.com', '北京市', null, null, null, null, null, null, null, null, null, null, '张成', '建设银行', '西单支行', null, null, null, null, null, '123', '111', '4297f44b13955235245b2497399d7a93', '1352095466484_5d10233c974145cd86d898a4afe84087a4e4d2896be046b250cc3ddabae55217', '123', '127.0.0.1', null, null, '123', '123123', '123', '0731dcsoft2010031200000000000010', 'xiaduoer');
+INSERT INTO `xx_member` VALUES ('8a9183a93a92e6de013a931577bb0000', '2012-10-24 22:03:08', '2012-11-25 10:12:40', '123', null, '2012-10-17 00:00:00', '200693.91000', '123@qq.com', '0', '', '', null, '2012-11-25 10:12:40', '0', '192.168.60.225', '7878467486@qq.com', '北京市', null, null, null, null, null, null, null, null, null, null, '张成', '建设银行', '西单支行', null, null, null, null, null, '123', '111', '4297f44b13955235245b2497399d7a93', '1352095466484_5d10233c974145cd86d898a4afe84087a4e4d2896be046b250cc3ddabae55217', '123', '127.0.0.1', null, null, '123', '123123', '123', '0731dcsoft2010031200000000000010', 'xiaduoer');
 INSERT INTO `xx_member` VALUES ('8a9183f63ad5735c013ad581e48f0000', '2012-11-06 19:36:30', '2012-11-06 19:36:30', null, null, null, '0.00000', '12333@qq.com', null, '', '', null, '2012-11-06 19:36:30', '0', '127.0.0.1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '0', '7777', null, '402881833054c381013054d0bf800002', 'xiaduoer');
 
 -- ----------------------------

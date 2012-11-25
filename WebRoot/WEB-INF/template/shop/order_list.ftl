@@ -19,9 +19,64 @@
 		DD_belatedPNG.fix(".belatedPNG");
 	</script>
 <![endif]-->
+<#include "/WEB-INF/template/shop/member_head.ftl">
 </head>
 <body class="memberCenter">
-	<#include "/WEB-INF/template/shop/header.ftl">
+	<#include "/WEB-INF/template/shop/member_header.ftl">
+		<section id="content-container" class="clearfix">
+         <div id="main-wrap" class="clearfix">
+            <#include "/WEB-INF/template/shop/member_left_order.ftl">
+            <div class="page_content_right sub-content">
+            	<table id="wp-calendar">
+						<tr>
+							<th>商品名称</th>
+							<th>订单编号</th>
+							<th>下单时间</th>
+							<th>订单金额</th>
+							<th>订单状态</th>
+						</tr>
+						<#list pager.result as order>
+							<tr>
+								<td width="350">
+									<a href="order!view.action?id=${order.id}">
+										<#list order.orderItemSet as productItem>
+											<#if productItem_index != 0>、</#if>
+											${productItem.productName}
+											<#if productItem_index == 3 && productItem_has_next>
+												...
+												<#break />
+											</#if>
+										</#list>
+									</a>
+								</td>
+								<td>
+									<a href="order!view.action?id=${order.id}">${order.orderSn}</a>
+								</td>
+								<td>
+									<span title="${order.createDate?string("yyyy-MM-dd HH:mm:ss")}">${order.createDate}</span>
+								</td>
+								<td>
+									${order.totalAmount?string(currencyFormat)}
+								</td>
+								<td>
+									<#if order.orderStatus != "completed" && order.orderStatus != "invalid">
+										[${action.getText("PaymentStatus." + order.paymentStatus)}]
+										[${action.getText("ShippingStatus." + order.shippingStatus)}]
+									<#else>
+										[${action.getText("OrderStatus." + order.orderStatus)}]
+									</#if>
+								</td>
+							</tr>
+						</#list>
+					</table>
+            </div>
+            <!-- END of page_content-->
+         </div>
+         <!-- END main-wrap -->
+      </section>
+      <!-- END content-container -->
+      
+      
 	<div class="body orderList">
 		<div class="bodyLeft">
 			<div class="memberInfo">

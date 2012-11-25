@@ -29,7 +29,6 @@
 		</ul>
 		<p>Copyright &copy; 2011 XXS. All rights reserved. 长沙鼎诚软件有限公司</p>
 		<#if setting.isShowPoweredInfo>
-			<p>Powered by <a class="systemName" href="http://www.shopxx.net" target="_blank">SHOP<span>++</span> V2.0</a></p>
 		</#if>
 	</div>
 </div>

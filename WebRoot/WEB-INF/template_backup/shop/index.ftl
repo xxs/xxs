@@ -58,13 +58,13 @@
 				<div id="sliderScrollable" class="scrollable">
 					<div class="items">
 						<div>
-							<img src="http://demo.image.shopxx.net/201101/banner1.jpg" />
+							<img src="" />
 						</div>
 						<div>
-							<img src="http://demo.image.shopxx.net/201101/banner2.jpg" />
+							<img src="" />
 						</div>
 						<div>
-							<img src="http://demo.image.shopxx.net/201101/banner3.jpg" />
+							<img src="" />
 						</div>
 					</div>
 					<div class="navi"></div>
@@ -112,7 +112,7 @@
 			</div>
 		</div>
 		<div class="blank"></div>
-		<img src="http://demo.image.shopxx.net/201101/banner4.jpg" />
+		<img src="" />
 		<div class="blank"></div>
 		<div class="newGoods">
 			<div class="left">
