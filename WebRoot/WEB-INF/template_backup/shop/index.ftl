@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>${(setting.shopName)!}<#if setting.isShowPoweredInfo> - Powered By SHOP++</#if></title>
-<meta name="Author" content="SHOP++ Team" />
-<meta name="Copyright" content="SHOP++" />
+<title>${(setting.shopName)!}<#if setting.isShowPoweredInfo> - XXS</#if></title>
+<meta name="Author" content="XXS-DW" />
+<meta name="Copyright" content="XXS" />
 <#if (setting.metaKeywords)! != ""><meta name="keywords" content="${setting.metaKeywords}" /></#if>
 <#if (setting.metaDescription)! != ""><meta name="description" content="${setting.metaDescription}" /></#if>
 <link rel="icon" href="favicon.ico" type="image/x-icon" />

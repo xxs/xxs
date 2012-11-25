@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>管理中心首页 - Powered By SHOP++</title>
-<meta name="Author" content="SHOP++ Team" />
-<meta name="Copyright" content="SHOP++" />
+<title>管理中心首页 - XXS</title>
+<meta name="Author" content="XXS-DW" />
+<meta name="Copyright" content="XXS" />
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="${base}/template/admin/css/base.css" rel="stylesheet" type="text/css" />
 <link href="${base}/template/admin/css/admin.css" rel="stylesheet" type="text/css" />
@@ -14,7 +14,7 @@
 </head>
 <body class="index">
 	<div class="bar">
-		欢迎使用SHOP++网店管理系统！
+		欢迎使用XXS网店管理系统！
 	</div>
 	<div class="body">
 		<div class="bodyLeft">
