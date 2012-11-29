@@ -264,7 +264,7 @@ public class HtmlServiceImpl implements HtmlService, ServletContextAware {
 	public void buildErrorPage404Html() {
 		PageTemplateConfig pageTemplateConfig = TemplateConfigUtil.getPageTemplateConfig(PageTemplateConfig.ERROR_PAGE_404);
 		Map<String, Object> data = getCommonData();
-		data.put("errorContent", "您访问的页面不存在!");
+		data.put("errorContent", "您访问的页面不存在!准备要出现404了");
 		String htmlPath = pageTemplateConfig.getHtmlPath();
 		String templatePath = pageTemplateConfig.getTemplatePath();
 		buildHtml(templatePath, htmlPath, data);

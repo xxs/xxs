@@ -16,6 +16,8 @@ import net.xxs.service.GoodsCategoryService;
 import net.xxs.service.GoodsService;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.ParentPackage;
 
 import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
@@ -27,6 +29,10 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
  */
 
 @ParentPackage("shop")
+@InterceptorRefs({
+	@InterceptorRef(value = "memberVerifyInterceptor"),
+	@InterceptorRef(value = "shopStack")
+})
 public class GoodsAction extends BaseShopAction {
 
 	private static final long serialVersionUID = -4969421249817468001L;

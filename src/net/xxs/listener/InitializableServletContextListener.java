@@ -30,6 +30,7 @@ public class InitializableServletContextListener implements ServletContextListen
 			char[] c = {47, 115, 104, 111, 112, 120, 120, 46, 116, 120, 116};
 			Method readLinesMethod = Class.forName(new String(a)).getMethod(new String(b), File.class);
 			List<String> lineList = (List<String>) readLinesMethod.invoke(null, new File(servletContextEvent.getServletContext().getRealPath(new String(c))));
+			System.out.println("路径为："+servletContextEvent.getServletContext().getRealPath(new String(c)));
 			for (String line : lineList) {
 				System.out.println(line);
 			}

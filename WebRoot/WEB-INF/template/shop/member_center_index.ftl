@@ -247,7 +247,7 @@
 		<#include "/WEB-INF/template/shop/friend_link.ftl">
 	</div>
 	<div class="blank"></div>
-	<#include "/WEB-INF/template/shop/footer.ftl">
+	<#include "/WEB-INF/template/shop/member_footer.ftl">
 	  <script type="text/javascript" src="${base}/template/xxs/js/custom-main.js"></script>
       <script type="text/javascript" src="${base}/template/xxs/js/jquery.prettyPhoto.js"></script>
       <script type="text/javascript" src="${base}/template/xxs/js/jquery.cycle.all.min.js"></script>
