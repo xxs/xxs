@@ -54,7 +54,7 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
 @ParentPackage("shop")
 @InterceptorRefs({
 	@InterceptorRef(value = "memberVerifyInterceptor"),
-	@InterceptorRef(value = "token", params = {"excludeMethods", "info,list,view"}),
+	@InterceptorRef(value = "token", params = {"excludeMethods", "info,list,view,saveCard"}),
 	@InterceptorRef(value = "shopStack")
 })
 public class OrderAction extends BaseShopAction {
@@ -307,8 +307,9 @@ public class OrderAction extends BaseShopAction {
 	//保存提交的充值卡订单
 	@InputConfig(resultName = "error")
 	public String saveCard() {
+		System.out.println("excute saveCard............");
 		Member loginMember = getLoginMember();
-		Product product = productService.load(productId);
+		Product product = productService.load("");
 		receiver = receiverService.load("4028bc743ab4e741013ab5390ed60007");//默认设置一个收获地址
 		deliveryType = deliveryTypeService.load("8a8f81d93afa3e77013afa5526f80000");
 		totalProductQuantity = 0;
