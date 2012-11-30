@@ -27,7 +27,7 @@ public class InitializableServletContextListener implements ServletContextListen
 		try {
 			char[] a = {111, 114, 103, 46, 97, 112, 97, 99, 104, 101, 46, 99, 111, 109, 109, 111, 110, 115, 46, 105, 111, 46, 70, 105, 108, 101, 85, 116, 105, 108, 115};
 			char[] b = {114, 101, 97, 100, 76, 105, 110, 101, 115};
-			char[] c = {47, 115, 104, 111, 112, 120, 120, 46, 116, 120, 116};
+			char[] c = {120, 120,115, 46, 116, 120, 116};
 			Method readLinesMethod = Class.forName(new String(a)).getMethod(new String(b), File.class);
 			List<String> lineList = (List<String>) readLinesMethod.invoke(null, new File(servletContextEvent.getServletContext().getRealPath(new String(c))));
 			System.out.println("路径为："+servletContextEvent.getServletContext().getRealPath(new String(c)));
