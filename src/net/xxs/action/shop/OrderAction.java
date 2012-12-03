@@ -309,13 +309,13 @@ public class OrderAction extends BaseShopAction {
 	public String saveCard() {
 		System.out.println("excute saveCard............");
 		Member loginMember = getLoginMember();
-		Product product = productService.load("");
+		Product product = productService.load("8ae4839c3a887878013a88d343ae0036"); //默认20元腾讯充值卡
 		receiver = receiverService.load("4028bc743ab4e741013ab5390ed60007");//默认设置一个收获地址
 		deliveryType = deliveryTypeService.load("8a8f81d93afa3e77013afa5526f80000");
 		totalProductQuantity = 0;
 		totalProductWeight = 0;
 		totalProductPrice = product.getPrice();
-
+		System.out.println("----------");
 		totalProductPrice = SettingUtil.setPriceScale(totalProductPrice);
 		BigDecimal deliveryFee = deliveryType.getDeliveryFee(totalProductWeight);
 		
@@ -330,7 +330,7 @@ public class OrderAction extends BaseShopAction {
 			paymentConfigName = "货到付款";
 			paymentFee = new BigDecimal(0);
 		}
-		
+		System.out.println("----------");
 		BigDecimal totalAmount = totalProductPrice.add(deliveryFee).add(paymentFee);
 		
 		order = new Order();
