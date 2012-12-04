@@ -60,7 +60,7 @@
                <!-- END subnav -->
             </aside>
             <div class="page_content_right sub-content">
-               <h4>${substring(goods.name, 50, "...")} <a href="/xxs/shop/order!saveCard.action?productId=${goods.id}">点击提交</a> </h4>
+               <h4>${substring(goods.name, 50, "...")} <a href="/shop/order!saveCard.action?productId=${goods.id}">点击提交</a> </h4>
                <p>商品编号: ${goods.goodsSn}</p>
                <div class="hr hr-dotted-double">&nbsp;</div>
             <div class="page_content_right sub-content">

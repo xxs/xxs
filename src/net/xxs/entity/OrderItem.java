@@ -6,11 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import net.xxs.util.SettingUtil;
 
+import org.compass.annotations.Index;
+import org.compass.annotations.SearchableProperty;
+import org.compass.annotations.Store;
 import org.hibernate.annotations.ForeignKey;
 
 /**
@@ -115,6 +119,8 @@ public class OrderItem extends BaseEntity {
 		BigDecimal subtotalPrice = productPrice.multiply(new BigDecimal(productQuantity.toString()));
 		return SettingUtil.setPriceScale(subtotalPrice);
 	}
+	
+	@Lob
 	@Column(nullable = false, updatable = false)
 	public String getCardNum() {
 		return cardNum;
@@ -123,6 +129,7 @@ public class OrderItem extends BaseEntity {
 	public void setCardNum(String cardNum) {
 		this.cardNum = cardNum;
 	}
+	@Lob
 	@Column(nullable = false, updatable = false)
 	public String getCardPwd() {
 		return cardPwd;

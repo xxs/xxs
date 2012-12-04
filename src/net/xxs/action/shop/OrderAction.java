@@ -311,6 +311,7 @@ public class OrderAction extends BaseShopAction {
 		Member loginMember = getLoginMember();
 		Product product = productService.load("8ae4839c3a887878013a88d343ae0036"); //默认20元腾讯充值卡
 		receiver = receiverService.load("4028bc743ab4e741013ab5390ed60007");//默认设置一个收获地址
+		//paymentConfig.setId("4028bc743ab4e741013ab538ee9c0006");//设置默认的支付方式
 		deliveryType = deliveryTypeService.load("8a8f81d93afa3e77013afa5526f80000");
 		totalProductQuantity = 0;
 		totalProductWeight = 0;
@@ -321,8 +322,9 @@ public class OrderAction extends BaseShopAction {
 		
 		String paymentConfigName = null;
 		BigDecimal paymentFee = null;
+		System.out.println("-------fffffff--");
 		if (deliveryType.getDeliveryMethod() == DeliveryMethod.deliveryAgainstPayment) {
-			paymentConfig = paymentConfigService.load(paymentConfig.getId());
+			paymentConfig = paymentConfigService.load("4028bc743b64ce89013b6524016e0000");
 			paymentConfigName = paymentConfig.getName();
 			paymentFee = paymentConfig.getPaymentFee(totalProductPrice.add(deliveryFee));
 		} else {
