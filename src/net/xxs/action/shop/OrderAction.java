@@ -371,8 +371,8 @@ public class OrderAction extends BaseShopAction {
 		orderItem.setGoodsHtmlPath(goods.getHtmlPath());
 		orderItem.setOrder(order);
 		orderItem.setProduct(product);
-		orderItem.setCardNum("11111111");//卡号
-		orderItem.setCardPwd("22222222");//密码
+		orderItem.setCardNum("FE5005100168");//卡号
+		orderItem.setCardPwd("227386847613318");//密码
 		orderItemService.save(orderItem);
 		
 		// 订单日志

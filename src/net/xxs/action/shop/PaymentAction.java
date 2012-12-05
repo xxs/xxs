@@ -478,7 +478,9 @@ public class PaymentAction extends BaseShopAction {
 			addActionError("支付产品不存在!");
 			return ERROR;
 		}
-		
+		System.out.println("---------------------------");
+		System.out.println("---------验证易宝的通知处理--------");
+		System.out.println("---------------------------");
 		BigDecimal totalAmount = paymentProduct.getPaymentAmount(getRequest());
 		boolean isSuccess = paymentProduct.isPaySuccess(getRequest());
 		payreturnMessage = paymentProduct.getPayreturnMessage(payment.getPaymentSn());
@@ -523,19 +525,19 @@ public class PaymentAction extends BaseShopAction {
 			order.setPaidAmount(order.getPaidAmount().add(totalAmount));
 			orderService.update(order);
 			
-			// 库存处理
-			if (getSetting().getStoreFreezeTime() == StoreFreezeTime.payment) {
-				for (OrderItem orderItem : order.getOrderItemSet()) {
-					Product product = orderItem.getProduct();
-					if (product.getStore() != null) {
-						product.setFreezeStore(product.getFreezeStore() + orderItem.getProductQuantity());
-						productService.update(product);
-						if (product.getIsOutOfStock()) {
-							cacheService.flushGoodsListPageCache(getRequest());
-						}
-					}
-				}
-			}
+//			// 库存处理
+//			if (getSetting().getStoreFreezeTime() == StoreFreezeTime.payment) {
+//				for (OrderItem orderItem : order.getOrderItemSet()) {
+//					Product product = orderItem.getProduct();
+//					if (product.getStore() != null) {
+//						product.setFreezeStore(product.getFreezeStore() + orderItem.getProductQuantity());
+//						productService.update(product);
+//						if (product.getIsOutOfStock()) {
+//							cacheService.flushGoodsListPageCache(getRequest());
+//						}
+//					}
+//				}
+//			}
 			
 			// 订单日志
 			String logInfo = "支付总金额: " + payment.getTotalAmount();

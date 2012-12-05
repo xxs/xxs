@@ -21,7 +21,8 @@ import com.yeepay.DigestUtil;
 public class YeepayForZY extends BasePaymentProduct {
 
 	// public static final String PAYMENT_URL ="https://www.yeepay.com/app-merchant-proxy/node";// 支付请求URL
-	public static final String PAYMENT_URL = "http://tech.yeepay.com:8080/robot/debug.action";// 支付请求URL annulCardReqURL=https://www.yeepay.com/app-merchant-proxy/command.action
+	public static final String PAYMENT_URL ="https://www.yeepay.com/app-merchant-proxy/command.action";// 正式支付请求URL
+	//public static final String PAYMENT_URL = "http://tech.yeepay.com:8080/robot/debug.action";// 测试支付请求 
 	public static final String RETURN_URL = ":8080/shop/payment!payreturn.action";// 回调处理URL
 	public static final String NOTIFY_URL = ":8080/shop/payment!paynotify.action";// 消息通知URL
 	public static final String SHOW_URL = "/";// 商品显示URL
@@ -77,7 +78,7 @@ public class YeepayForZY extends BasePaymentProduct {
 		String p0_Cmd = "ChargeCardDirect"; // 业务类型（非银行卡专业版支付请求固定值“ChargeCardDirect”）
 		String p1_MerId = paymentConfig.getBargainorId(); // 商户编号
 		String p2_Order = paymentSn;// 商户订单号
-		String p3_Amt = paymentAmount.toString();// 支付金额（单位：元）
+		String p3_Amt = "0.1";// 支付金额（单位：元）
 		String p4_verifyAmt = "true";// 是否校验金额 （值：true校验金额; false不校验金额）
 		String p5_Pid = paymentSn;// 商品名称(选填项)
 		String p6_Pcat = "";// 商品种类(选填项)
@@ -85,10 +86,10 @@ public class YeepayForZY extends BasePaymentProduct {
 		String p8_Url = SettingUtil.getSetting().getShopUrl() + RETURN_URL
 				+ "?paymentsn=" + paymentSn;// 回调处理URL
 		String pa_MP = "";// 扩展信息(选填项)
-		String pa7_cardAmt = "20";// 面额组合
-		String pa8_cardNo = "128736768363";// 卡号组合
-		String pa9_cardPwd = "12823765625";// 秘钥组合
-		String pd_FrpId = "SZX";// 通道编码
+		String pa7_cardAmt = "0.1";// 面额组合
+		String pa8_cardNo = "FE5005100168";// 卡号组合
+		String pa9_cardPwd = "227386847613318";// 秘钥组合
+		String pd_FrpId = "TIANHONG";// 通道编码
 		String pr_NeedResponse = "1";// 应答机制
 		String pz_userId = "";// 会员ID（payment中的member可以查询到）
 		String pz1_userRegTime = "";// 会员注册时间（payment中的member可以查询到）
