@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : JTM
+Source Server         : xxs
 Source Server Version : 50154
 Source Host           : localhost:3306
 Source Database       : xxs
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50154
 File Encoding         : 65001
 
-Date: 2012-12-06 17:34:21
+Date: 2012-12-06 23:38:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,7 @@ CREATE TABLE `xx_admin` (
 -- ----------------------------
 -- Records of xx_admin
 -- ----------------------------
-INSERT INTO `xx_admin` VALUES ('0731dcsoft2010031200000000000017', '2011-01-01 00:00:00', '2012-12-06 17:18:56', '技术部', 'xxs@163.com', '', '', '', '', null, '2012-12-06 17:18:56', '0', '127.0.0.1', 'ADMIN', '21232f297a57a5a743894a0e4a801fc3', 'admin');
+INSERT INTO `xx_admin` VALUES ('0731dcsoft2010031200000000000017', '2011-01-01 00:00:00', '2012-12-06 23:25:52', '技术部', 'xxs@163.com', '', '', '', '', null, '2012-12-06 23:25:52', '0', '127.0.0.1', 'ADMIN', '21232f297a57a5a743894a0e4a801fc3', 'admin');
 
 -- ----------------------------
 -- Table structure for `xx_admin_role`
@@ -170,8 +170,6 @@ CREATE TABLE `xx_brand` (
   `name` varchar(255) NOT NULL,
   `order_list` int(11) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
-  `discount` decimal(19,4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `xx_brand_order_list` (`order_list`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -179,21 +177,21 @@ CREATE TABLE `xx_brand` (
 -- ----------------------------
 -- Records of xx_brand
 -- ----------------------------
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88a15b0f0001', '2012-10-22 21:20:06', '2012-10-31 11:44:30', '', null, '骏网一卡通', '1', '', 'JUNNET', '0.8450');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ac6eb10002', '2012-10-22 21:32:12', '2012-10-31 11:49:24', '', null, '盛大卡', '2', '', 'SNDACARD', '0.8300');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88aca0800003', '2012-10-22 21:32:25', '2012-10-31 11:50:16', '', null, '神州行', '3', '', 'SZX', '0.9550');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88acc1ef0004', '2012-10-22 21:32:34', '2012-10-31 11:50:55', '', null, '征途卡', '4', '', 'ZHENGTU', '0.8300');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88acef930005', '2012-10-22 21:32:45', '2012-10-22 21:32:45', '', null, 'Q币卡', '5', '', 'QQCARD', '0.8200');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ad18e10006', '2012-10-22 21:32:56', '2012-10-22 21:32:56', '', null, '联通卡', '6', '', 'UNICOM', '0.9550');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ad3c100007', '2012-10-22 21:33:05', '2012-10-22 21:33:05', '', null, '久游卡', '7', '', 'JIUYOU', '0.8200');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ad61df0008', '2012-10-22 21:33:15', '2012-10-22 21:33:15', '', null, '易宝e卡通', '8', '', 'YPCARD', '0.8900');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ad845a0009', '2012-10-22 21:33:23', '2012-10-22 21:33:23', '', null, '网易卡', '9', '', 'NETEASE', '0.8200');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ada7f6000a', '2012-10-22 21:33:33', '2012-10-22 21:33:33', '', null, '完美卡', '10', '', 'WANMEI', '0.8200');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88add167000b', '2012-10-22 21:33:43', '2012-10-22 21:33:43', '', null, '搜狐卡', '11', '', 'SOHU', '0.8200');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ae0511000c', '2012-10-22 21:33:56', '2012-10-22 21:33:56', '', null, '电信卡', '12', '', 'TELECOM', '0.9500');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ae29c8000d', '2012-10-22 21:34:06', '2012-10-22 21:34:06', '', null, '纵游一卡通', '13', '', 'ZONGYOU', '0.8200');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ae4be5000e', '2012-10-22 21:34:15', '2012-10-22 21:34:15', '', null, '天下一卡通', '14', '', 'TIANXIA', '0.8200');
-INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ae757d000f', '2012-10-22 21:34:25', '2012-10-22 21:34:25', '', null, '天宏一卡通', '15', '', 'TIANHONG', '0.8200');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88a15b0f0001', '2012-10-22 21:20:06', '2012-10-31 11:44:30', '', null, '骏网一卡通', '1', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ac6eb10002', '2012-10-22 21:32:12', '2012-10-31 11:49:24', '', null, '盛大卡', '2', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88aca0800003', '2012-10-22 21:32:25', '2012-10-31 11:50:16', '', null, '神州行', '3', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88acc1ef0004', '2012-10-22 21:32:34', '2012-10-31 11:50:55', '', null, '征途卡', '4', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88acef930005', '2012-10-22 21:32:45', '2012-10-22 21:32:45', '', null, 'Q币卡', '5', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ad18e10006', '2012-10-22 21:32:56', '2012-10-22 21:32:56', '', null, '联通卡', '6', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ad3c100007', '2012-10-22 21:33:05', '2012-10-22 21:33:05', '', null, '久游卡', '7', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ad61df0008', '2012-10-22 21:33:15', '2012-10-22 21:33:15', '', null, '易宝e卡通', '8', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ad845a0009', '2012-10-22 21:33:23', '2012-10-22 21:33:23', '', null, '网易卡', '9', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ada7f6000a', '2012-10-22 21:33:33', '2012-10-22 21:33:33', '', null, '完美卡', '10', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88add167000b', '2012-10-22 21:33:43', '2012-10-22 21:33:43', '', null, '搜狐卡', '11', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ae0511000c', '2012-10-22 21:33:56', '2012-10-22 21:33:56', '', null, '电信卡', '12', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ae29c8000d', '2012-10-22 21:34:06', '2012-10-22 21:34:06', '', null, '纵游一卡通', '13', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ae4be5000e', '2012-10-22 21:34:15', '2012-10-22 21:34:15', '', null, '天下一卡通', '14', '');
+INSERT INTO `xx_brand` VALUES ('8ae4839c3a887878013a88ae757d000f', '2012-10-22 21:34:25', '2012-10-22 21:34:25', '', null, '天宏一卡通', '15', '');
 
 -- ----------------------------
 -- Table structure for `xx_cart_item`
@@ -427,6 +425,10 @@ INSERT INTO `xx_deposit` VALUES ('8a8f80153ae0d04c013ae0e48266001f', '2012-11-09
 INSERT INTO `xx_deposit` VALUES ('8a8f80153ae0d04c013ae0e58a860026', '2012-11-09 00:41:10', '2012-11-09 00:41:10', '200339.08', '89.10', '0.00', '0', '8a9183a93a92e6de013a931577bb0000');
 INSERT INTO `xx_deposit` VALUES ('8a8f80153ae0e850013ae0eeff240005', '2012-11-09 00:51:30', '2012-11-09 00:51:30', '200343.54', '4.46', '0.00', '0', '8a9183a93a92e6de013a931577bb0000');
 INSERT INTO `xx_deposit` VALUES ('8a8f80153ae0e850013ae0ef2e6e0006', '2012-11-09 00:51:42', '2012-11-09 00:51:42', '0.95', '0.05', '0.00', '7', '8a9182e13ab73c9e013ab74780e80000');
+INSERT INTO `xx_deposit` VALUES ('8a91807c3b70d14d013b70d260a30005', '2012-12-06 23:25:33', '2012-12-06 23:25:33', '200749.59', '19.20', '0.00', '0', '8a9183a93a92e6de013a931577bb0000');
+INSERT INTO `xx_deposit` VALUES ('8a91807c3b70d14d013b70d261090006', '2012-12-06 23:25:33', '2012-12-06 23:25:33', '202.75', '0.20', '0.00', '7', '8a9182e13ab73c9e013ab74780e80000');
+INSERT INTO `xx_deposit` VALUES ('8a91807c3b70d14d013b70d4e071000d', '2012-12-06 23:28:17', '2012-12-06 23:28:17', '200766.49', '16.90', '0.00', '0', '8a9183a93a92e6de013a931577bb0000');
+INSERT INTO `xx_deposit` VALUES ('8a91807c3b70d14d013b70d4e0e0000e', '2012-12-06 23:28:17', '2012-12-06 23:28:17', '202.93', '0.18', '0.00', '7', '8a9182e13ab73c9e013ab74780e80000');
 INSERT INTO `xx_deposit` VALUES ('8a9183a93a92e6de013a93157c620001', '2012-10-24 22:03:09', '2012-10-24 22:03:09', '10000.00', '10000.00', '0.00', '2', '8a9183a93a92e6de013a931577bb0000');
 
 -- ----------------------------
@@ -856,8 +858,8 @@ CREATE TABLE `xx_member` (
 -- ----------------------------
 INSERT INTO `xx_member` VALUES ('4028bc743ab48628013ab4b892a00000', '2012-10-31 10:48:46', '2012-11-14 22:58:06', null, null, null, '698.64000', '123@qq.com', '0', '', '', null, '2012-11-14 22:58:06', '0', '127.0.0.1', '111111111', null, null, null, null, null, null, null, null, null, null, null, null, '建设银行', null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '57', '112233', null, '0731dcsoft2010031200000000000010', 'xiaduoer');
 INSERT INTO `xx_member` VALUES ('4028bc743abf206b013abf27afae0000', '2012-11-02 11:26:20', '2012-11-02 11:42:34', null, null, '2012-11-22 00:00:00', '3060.00000', '123456@qq.com', '0', '', '', null, '2012-11-02 11:26:51', '0', '127.0.0.1', '24312341234', null, null, null, null, null, null, null, null, null, null, null, null, '建设银行', null, null, null, null, null, null, null, '123456', '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '5000', '123456', null, '402881833054c381013054d0bf800002', 'xiaduoer');
-INSERT INTO `xx_member` VALUES ('8a9182e13ab73c9e013ab74780e80000', '2012-10-31 22:44:07', '2012-12-04 13:55:15', null, null, null, '202.55000', 'xiaduoer@163.com', null, '', '', null, '2012-11-10 14:40:29', '2', '127.0.0.1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '0', 'xiaduoer', null, '402881833054c381013054d0bf800002', 'xiaduoer');
-INSERT INTO `xx_member` VALUES ('8a9183a93a92e6de013a931577bb0000', '2012-10-24 22:03:08', '2012-12-06 10:57:08', '123', null, '2012-10-17 00:00:00', '200730.39000', '123@qq.com', '0', '', '', null, '2012-12-06 10:57:08', '0', '127.0.0.1', '7878467486@qq.com', '北京市', null, null, null, null, null, null, null, null, null, null, '张成', '建设银行', '西单支行', null, null, null, null, null, '123', '111', '4297f44b13955235245b2497399d7a93', '1352095466484_5d10233c974145cd86d898a4afe84087a4e4d2896be046b250cc3ddabae55217', '123', '127.0.0.1', null, null, '123', '123123', '123', '0731dcsoft2010031200000000000010', 'xiaduoer');
+INSERT INTO `xx_member` VALUES ('8a9182e13ab73c9e013ab74780e80000', '2012-10-31 22:44:07', '2012-12-06 23:28:17', null, null, null, '202.93000', 'xiaduoer@163.com', null, '', '', null, '2012-11-10 14:40:29', '2', '127.0.0.1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '0', 'xiaduoer', null, '402881833054c381013054d0bf800002', 'xiaduoer');
+INSERT INTO `xx_member` VALUES ('8a9183a93a92e6de013a931577bb0000', '2012-10-24 22:03:08', '2012-12-06 23:28:17', '123', null, '2012-10-17 00:00:00', '200766.49000', '123@qq.com', '0', '', '', null, '2012-12-06 23:25:00', '0', '127.0.0.1', '7878467486@qq.com', '北京市', null, null, null, null, null, null, null, null, null, null, '张成', '建设银行', '西单支行', null, null, null, null, null, '123', '111', '4297f44b13955235245b2497399d7a93', '1352095466484_5d10233c974145cd86d898a4afe84087a4e4d2896be046b250cc3ddabae55217', '123', '127.0.0.1', null, null, '123', '123123', '123', '0731dcsoft2010031200000000000010', 'xiaduoer');
 INSERT INTO `xx_member` VALUES ('8a9183f63ad5735c013ad581e48f0000', '2012-11-06 19:36:30', '2012-11-06 19:36:30', null, null, null, '0.00000', '12333@qq.com', null, '', '', null, '2012-11-06 19:36:30', '0', '127.0.0.1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '4297f44b13955235245b2497399d7a93', null, null, '127.0.0.1', null, null, '0', '7777', null, '402881833054c381013054d0bf800002', 'xiaduoer');
 
 -- ----------------------------
@@ -1080,6 +1082,8 @@ INSERT INTO `xx_order` VALUES ('8a8f80153ae0e850013ae0eebc640001', '2012-11-09 0
 INSERT INTO `xx_order` VALUES ('8a8f82133aff6bbb013aff6fc8c60001', '2012-11-14 23:00:46', '2012-11-14 23:00:46', '0.00000', '无配送', null, '', 'DD100021', '0', '0.00000', '货到付款', '0.00000', '0', 'sssaa', '{\"name\":\"黄浦区\",\"path\":\"4028bc743ab4e741013ab534172b0001,4028bc743ab4e741013ab53571d90003\",\"displayName\":\"上海黄浦区\",\"orderList\":0,\"grade\":1,\"id\":\"4028bc743ab4e741013ab53571d90003\"}', '23', '摩卡', '2342', '2343', '0', '100.00000', '100.00000', '1', '0', '4028bc743ab48628013ab4b892a00000', '8a8f81d93afa3e77013afa5526f80000', null);
 INSERT INTO `xx_order` VALUES ('8a8f82133aff6bbb013aff70ee860005', '2012-11-14 23:02:02', '2012-11-14 23:02:02', '0.00000', '无配送', null, '', 'DD100022', '0', '0.00000', '易宝支付', '0.00000', '0', 'sssaa', '{\"name\":\"黄浦区\",\"path\":\"4028bc743ab4e741013ab534172b0001,4028bc743ab4e741013ab53571d90003\",\"displayName\":\"上海黄浦区\",\"orderList\":0,\"grade\":1,\"id\":\"4028bc743ab4e741013ab53571d90003\"}', '23', '摩卡', '2342', '2343', '0', '20.00000', '20.00000', '1', '0', '4028bc743ab48628013ab4b892a00000', '8a8f81d93afa3e77013afa5526f80000', '4028bc743ab4e741013ab538ee9c0006');
 INSERT INTO `xx_order` VALUES ('8a8f82133aff6bbb013aff721eda000a', '2012-11-14 23:03:20', '2012-11-14 23:03:20', '0.00000', '无配送', null, '', 'DD100023', '0', '0.00000', '易宝支付', '0.00000', '0', 'sssaa', '{\"name\":\"黄浦区\",\"path\":\"4028bc743ab4e741013ab534172b0001,4028bc743ab4e741013ab53571d90003\",\"displayName\":\"上海黄浦区\",\"orderList\":0,\"grade\":1,\"id\":\"4028bc743ab4e741013ab53571d90003\"}', '23', '摩卡', '2342', '2343', '0', '10.00000', '10.00000', '1', '0', '4028bc743ab48628013ab4b892a00000', '8a8f81d93afa3e77013afa5526f80000', '4028bc743ab4e741013ab538ee9c0006');
+INSERT INTO `xx_order` VALUES ('8a91807c3b70d14d013b70d1f9d40000', '2012-12-06 23:25:07', '2012-12-06 23:25:33', '0.00000', '虚拟配送', '[\"8ae4839c3a887878013a88d311030032\"]', null, 'DD100034', '0', '20.00000', '易宝支付', '0.00000', '2', 'xxs', '{\"name\":\"黄浦区\",\"path\":\"4028bc743ab4e741013ab534172b0001,4028bc743ab4e741013ab53571d90003\",\"displayName\":\"上海黄浦区\",\"grade\":1,\"orderList\":0,\"id\":\"4028bc743ab4e741013ab53571d90003\"}', '234234', 'xxs', '23423', '23423', '0', '20.00000', '20.00000', '0', '0', '8a9183a93a92e6de013a931577bb0000', '8a8f81d93afa3e77013afa5526f80000', '4028bc743ab4e741013ab538ee9c0006');
+INSERT INTO `xx_order` VALUES ('8a91807c3b70d14d013b70d44a5e0009', '2012-12-06 23:27:39', '2012-12-06 23:28:17', '0.00000', '虚拟配送', '[\"8ae4839c3a887878013a88d311030032\"]', null, 'DD100035', '0', '17.60000', '易宝支付', '0.00000', '2', 'xxs', '{\"name\":\"黄浦区\",\"path\":\"4028bc743ab4e741013ab534172b0001,4028bc743ab4e741013ab53571d90003\",\"displayName\":\"上海黄浦区\",\"grade\":1,\"orderList\":0,\"id\":\"4028bc743ab4e741013ab53571d90003\"}', '234234', 'xxs', '23423', '23423', '0', '17.60000', '17.60000', '0', '0', '8a9183a93a92e6de013a931577bb0000', '8a8f81d93afa3e77013afa5526f80000', '4028bc743ab4e741013ab538ee9c0006');
 INSERT INTO `xx_order` VALUES ('8a9182e13ab666b7013ab6707b5a0002', '2012-10-31 18:49:15', '2012-11-13 23:13:48', '12.00000', '物流1', '[\"8ae4839c3a887878013a88d311030032\"]', '', 'DD100003', '2', '69.00000', '易宝支付', '0.00000', '2', 'sssaa', '{\"name\":\"黄浦区\",\"path\":\"4028bc743ab4e741013ab534172b0001,4028bc743ab4e741013ab53571d90003\",\"displayName\":\"上海黄浦区\",\"orderList\":0,\"grade\":1,\"id\":\"4028bc743ab4e741013ab53571d90003\"}', '23', '摩卡', '2342', '2343', '2', '69.00000', '57.00000', '2', '0', '4028bc743ab48628013ab4b892a00000', null, '4028bc743ab4e741013ab538ee9c0006');
 INSERT INTO `xx_order` VALUES ('ff8080813adff468013ae07396a60001', '2012-11-08 22:36:42', '2012-11-13 23:13:48', '12.00000', '物流1', '[\"8ae4839c3a887878013a88d311030032\"]', '', 'DD100006', '0', '25.50000', '易宝支付', '0.00000', '2', 'xxs', '{\"name\":\"黄浦区\",\"path\":\"4028bc743ab4e741013ab534172b0001,4028bc743ab4e741013ab53571d90003\",\"displayName\":\"上海黄浦区\",\"orderList\":0,\"grade\":1,\"id\":\"4028bc743ab4e741013ab53571d90003\"}', '234234', 'xxs', '23423', '23423', '0', '25.50000', '13.50000', '3', '0', '8a9183a93a92e6de013a931577bb0000', null, '4028bc743ab4e741013ab538ee9c0006');
 
@@ -1141,6 +1145,8 @@ INSERT INTO `xx_order_item` VALUES ('8a8f80153ae0e850013ae0eebcbf0002', '2012-11
 INSERT INTO `xx_order_item` VALUES ('8a8f82133aff6bbb013aff6fc91e0002', '2012-11-14 23:00:47', '2012-11-14 23:00:47', '0', '/html/201210/511c9da09b1f486dba228e497878c2f5.html', '腾讯一卡通 [100元]', '100.00000', '1', 'SN_DC8CC08204F0', '8ae4839c3a887878013a88d347ba0039', '8a8f82133aff6bbb013aff6fc8c60001', '', '');
 INSERT INTO `xx_order_item` VALUES ('8a8f82133aff6bbb013aff70eeb60006', '2012-11-14 23:02:02', '2012-11-14 23:02:02', '0', '/html/201210/511c9da09b1f486dba228e497878c2f5.html', '腾讯一卡通 [20元]', '20.00000', '1', 'SN_79DDA7EB5CBB', '8ae4839c3a887878013a88d343ae0036', '8a8f82133aff6bbb013aff70ee860005', '', '');
 INSERT INTO `xx_order_item` VALUES ('8a8f82133aff6bbb013aff721f15000b', '2012-11-14 23:03:20', '2012-11-14 23:03:20', '0', '/html/201210/511c9da09b1f486dba228e497878c2f5.html', '腾讯一卡通 [10元]', '10.00000', '1', 'SN_E7A926BF2C5A', '8ae4839c3a887878013a88d3381e0034', '8a8f82133aff6bbb013aff721eda000a', '', '');
+INSERT INTO `xx_order_item` VALUES ('8a91807c3b70d14d013b70d1fa270001', '2012-12-06 23:25:07', '2012-12-06 23:25:07', '0', '/html/201210/511c9da09b1f486dba228e497878c2f5.html', '腾讯一卡通 [20元]', '20.00000', '1', 'SN_79DDA7EB5CBB', '8ae4839c3a887878013a88d343ae0036', '8a91807c3b70d14d013b70d1f9d40000', 'FE5005100168', '227386847613318');
+INSERT INTO `xx_order_item` VALUES ('8a91807c3b70d14d013b70d44a90000a', '2012-12-06 23:27:39', '2012-12-06 23:27:39', '0', '/html/201210/511c9da09b1f486dba228e497878c2f5.html', '腾讯一卡通 [20元]', '20.00000', '1', 'SN_79DDA7EB5CBB', '8ae4839c3a887878013a88d343ae0036', '8a91807c3b70d14d013b70d44a5e0009', 'FE5005100168', '227386847613318');
 INSERT INTO `xx_order_item` VALUES ('8a9182e13ab666b7013ab6707bb00003', '2012-10-31 18:49:15', '2012-10-31 19:55:12', '2', '/html/201210/511c9da09b1f486dba228e497878c2f5.html', '腾讯一卡通 [30元]', '28.50000', '2', 'SN_5690B347AA89', '8ae4839c3a887878013a88d343fe0037', '8a9182e13ab666b7013ab6707b5a0002', '', '');
 INSERT INTO `xx_order_item` VALUES ('ff8080813adff468013ae07396f70002', '2012-11-08 22:36:42', '2012-11-08 22:36:42', '0', '/html/201210/511c9da09b1f486dba228e497878c2f5.html', '腾讯一卡通 [5元]', '4.50000', '3', 'SN_8B79E4D89FB8', '8ae4839c3a887878013a88d334590033', 'ff8080813adff468013ae07396a60001', '', '');
 
@@ -1210,6 +1216,10 @@ INSERT INTO `xx_order_log` VALUES ('8a8f80153ae0e850013ae0ef36060007', '2012-11-
 INSERT INTO `xx_order_log` VALUES ('8a8f82133aff6bbb013aff6fc9570003', '2012-11-14 23:00:47', '2012-11-14 23:00:47', null, null, '0', 'DD100021', '8a8f82133aff6bbb013aff6fc8c60001');
 INSERT INTO `xx_order_log` VALUES ('8a8f82133aff6bbb013aff70eeda0007', '2012-11-14 23:02:02', '2012-11-14 23:02:02', null, null, '0', 'DD100022', '8a8f82133aff6bbb013aff70ee860005');
 INSERT INTO `xx_order_log` VALUES ('8a8f82133aff6bbb013aff721f37000c', '2012-11-14 23:03:20', '2012-11-14 23:03:20', null, null, '0', 'DD100023', '8a8f82133aff6bbb013aff721eda000a');
+INSERT INTO `xx_order_log` VALUES ('8a91807c3b70d14d013b70d1fa530002', '2012-12-06 23:25:07', '2012-12-06 23:25:07', null, null, '0', 'DD100034', '8a91807c3b70d14d013b70d1f9d40000');
+INSERT INTO `xx_order_log` VALUES ('8a91807c3b70d14d013b70d261270007', '2012-12-06 23:25:33', '2012-12-06 23:25:33', '支付总金额: ￥20.00元', null, '2', 'DD100034', '8a91807c3b70d14d013b70d1f9d40000');
+INSERT INTO `xx_order_log` VALUES ('8a91807c3b70d14d013b70d44ab1000b', '2012-12-06 23:27:39', '2012-12-06 23:27:39', null, null, '0', 'DD100035', '8a91807c3b70d14d013b70d44a5e0009');
+INSERT INTO `xx_order_log` VALUES ('8a91807c3b70d14d013b70d4e107000f', '2012-12-06 23:28:17', '2012-12-06 23:28:17', '支付总金额: ￥17.60元', null, '2', 'DD100035', '8a91807c3b70d14d013b70d44a5e0009');
 INSERT INTO `xx_order_log` VALUES ('8a9182e13ab666b7013ab6707bbf0004', '2012-10-31 18:49:15', '2012-10-31 18:49:15', null, null, '0', 'DD100003', '8a9182e13ab666b7013ab6707b5a0002');
 INSERT INTO `xx_order_log` VALUES ('8a9182e13ab666b7013ab67096960006', '2012-10-31 18:49:22', '2012-10-31 18:49:22', '支付总金额: ￥69.00元', null, '2', 'DD100003', '8a9182e13ab666b7013ab6707b5a0002');
 INSERT INTO `xx_order_log` VALUES ('8a9182e13ab666b7013ab6acd9a40009', '2012-10-31 19:55:12', '2012-10-31 19:55:12', '物流公司: xxs<br />商品信息: 腾讯一卡通 [30元] × 2<br />', 'admin', '4', 'DD100003', '8a9182e13ab666b7013ab6707b5a0002');
@@ -1299,6 +1309,9 @@ INSERT INTO `xx_payment` VALUES ('8a8f80153ae0d04c013ae0e559bc0025', '2012-11-09
 INSERT INTO `xx_payment` VALUES ('8a8f80153ae0e850013ae0eec60c0004', '2012-11-09 00:51:15', '2012-11-09 00:51:17', '10001126856', '易宝支付', null, null, '123123', '易宝支付', '0.00000', 'ZF100026', '3', '2', '4.50000', '8a9183a93a92e6de013a931577bb0000', '8a8f80153ae0e850013ae0eebc640001', '4028bc743ab4e741013ab538ee9c0006', null);
 INSERT INTO `xx_payment` VALUES ('8a8f82133aff6bbb013aff70f48f0008', '2012-11-14 23:02:03', '2012-11-14 23:02:03', '10001126856', '易宝支付', null, null, '112233', '易宝支付', '0.00000', 'ZF100033', '0', '2', '20.00000', '4028bc743ab48628013ab4b892a00000', '8a8f82133aff6bbb013aff70ee860005', '4028bc743ab4e741013ab538ee9c0006', null);
 INSERT INTO `xx_payment` VALUES ('8a8f82133aff6bbb013aff72249f000d', '2012-11-14 23:03:21', '2012-11-14 23:03:21', '10001126856', '易宝支付', null, null, '112233', '易宝支付', '0.00000', 'ZF100034', '0', '2', '10.00000', '4028bc743ab48628013ab4b892a00000', '8a8f82133aff6bbb013aff721eda000a', '4028bc743ab4e741013ab538ee9c0006', null);
+INSERT INTO `xx_payment` VALUES ('8a91807c3b70d14d013b70d251b40003', '2012-12-06 23:25:29', '2012-12-06 23:25:29', '10001126856', '易宝支付', null, null, '123123', '易宝支付', '0.00000', 'ZF100046', '0', '2', '20.00000', '8a9183a93a92e6de013a931577bb0000', '8a91807c3b70d14d013b70d1f9d40000', '4028bc743ab4e741013ab538ee9c0006', null);
+INSERT INTO `xx_payment` VALUES ('8a91807c3b70d14d013b70d251b90004', '2012-12-06 23:25:29', '2012-12-06 23:25:33', '10001126856', '易宝支付', null, null, '123123', '易宝支付', '0.00000', 'ZF100047', '3', '2', '20.00000', '8a9183a93a92e6de013a931577bb0000', '8a91807c3b70d14d013b70d1f9d40000', '4028bc743ab4e741013ab538ee9c0006', null);
+INSERT INTO `xx_payment` VALUES ('8a91807c3b70d14d013b70d4d9cc000c', '2012-12-06 23:28:15', '2012-12-06 23:28:17', '10001126856', '易宝支付', null, null, '123123', '易宝支付', '0.00000', 'ZF100048', '3', '2', '17.60000', '8a9183a93a92e6de013a931577bb0000', '8a91807c3b70d14d013b70d44a5e0009', '4028bc743ab4e741013ab538ee9c0006', null);
 INSERT INTO `xx_payment` VALUES ('8a9182e13ab666b7013ab67085ac0005', '2012-10-31 18:49:18', '2012-10-31 18:49:22', '10001126856', '易宝支付', null, null, '112233', '易宝支付', '0.00000', 'ZF100009', '3', '2', '69.00000', '4028bc743ab48628013ab4b892a00000', '8a9182e13ab666b7013ab6707b5a0002', '4028bc743ab4e741013ab538ee9c0006', null);
 INSERT INTO `xx_payment` VALUES ('ff8080813adff468013ae073cb7b0004', '2012-11-08 22:36:56', '2012-11-08 22:37:00', '10001126856', '易宝支付', null, null, '123123', '易宝支付', '0.00000', 'ZF100016', '3', '2', '25.50000', '8a9183a93a92e6de013a931577bb0000', 'ff8080813adff468013ae07396a60001', '4028bc743ab4e741013ab538ee9c0006', null);
 
@@ -1326,7 +1339,7 @@ CREATE TABLE `xx_payment_config` (
 -- ----------------------------
 -- Records of xx_payment_config
 -- ----------------------------
-INSERT INTO `xx_payment_config` VALUES ('4028bc743ab4e741013ab538ee9c0006', '2012-10-31 13:08:58', '2012-12-04 16:59:26', '10001126856', '69cl522AV6q613Ii4W6u8K6XuW8vM1N6bFgyv769220IuYe9u37N4y7rI4Pl', null, '易宝支付', '1', '2', '0.00000', '0', 'yeepay');
+INSERT INTO `xx_payment_config` VALUES ('4028bc743ab4e741013ab538ee9c0006', '2012-10-31 13:08:58', '2012-12-06 21:35:11', '10001126856', '69cl522AV6q613Ii4W6u8K6XuW8vM1N6bFgyv769220IuYe9u37N4y7rI4Pl', 'ttt', '易宝支付', '1', '2', '0.00000', '0', 'yeepay');
 INSERT INTO `xx_payment_config` VALUES ('4028bc743b64ce89013b6524016e0000', '2012-12-04 16:59:16', '2012-12-05 14:03:54', '10011842896', '09ocl8ku8todssltsgyicyai6p1c0d488kvnh1rt88q0s7sjwq0hb0n3mgi8', 'www', '易宝非银行卡支付(专业版)', '0', '2', '0.00000', '0', 'yeepayforzy');
 
 -- ----------------------------
@@ -1356,6 +1369,10 @@ CREATE TABLE `xx_payment_discount` (
 -- ----------------------------
 INSERT INTO `xx_payment_discount` VALUES ('4028bc743b6f5e56013b6f6b628c0002', '2012-12-06 16:53:26', '2012-12-06 16:53:26', 'rtyrty', '34.00', '234', null, '8ae4839c3a887878013a88ae29c8000d', '4028bc743b64ce89013b6524016e0000');
 INSERT INTO `xx_payment_discount` VALUES ('4028bc743b6f5e56013b6f6f6d950003', '2012-12-06 16:57:51', '2012-12-06 16:57:51', 'tttt', '33.00', '33', null, '8ae4839c3a887878013a88ae757d000f', '4028bc743b64ce89013b6524016e0000');
+INSERT INTO `xx_payment_discount` VALUES ('8a91807c3b70d14d013b70d413fc0008', '2012-12-06 23:27:25', '2012-12-06 23:27:25', 'QQCARD', '0.88', '555', 'admin', '8ae4839c3a887878013a88acef930005', '4028bc743ab4e741013ab538ee9c0006');
+INSERT INTO `xx_payment_discount` VALUES ('8a9182e13b6ff69f013b708493690000', '2012-12-06 22:00:35', '2012-12-06 22:00:35', 'ttt', '345555.00', '234', 'admin', '8ae4839c3a887878013a88add167000b', '4028bc743b64ce89013b6524016e0000');
+INSERT INTO `xx_payment_discount` VALUES ('8a9182e13b6ff69f013b708511540001', '2012-12-06 22:01:07', '2012-12-06 22:01:07', '777', '777.00', '777', 'admin', '8ae4839c3a887878013a88ae757d000f', '4028bc743b64ce89013b6524016e0000');
+INSERT INTO `xx_payment_discount` VALUES ('8a9182e13b6ff69f013b70873c750002', '2012-12-06 22:03:29', '2012-12-06 22:03:29', '666', '666.00', '666', 'admin', '8ae4839c3a887878013a88ad845a0009', '4028bc743b64ce89013b6524016e0000');
 
 -- ----------------------------
 -- Table structure for `xx_product`

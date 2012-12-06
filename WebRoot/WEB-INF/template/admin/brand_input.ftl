@@ -89,22 +89,6 @@ $().ready(function() {
 				</tr>
 				<tr>
 					<th>
-						通道编码: 
-					</th>
-					<td>
-						<input type="text" name="brand.code" class="formText" value="${(brand.code)!}" />
-					</td>
-				</tr>
-				<tr>
-					<th>
-						折扣率: 
-					</th>
-					<td>
-						<input type="text" name="brand.discount" class="formText" value="${(brand.discount)!}" />
-					</td>
-				</tr>
-				<tr>
-					<th>
 						排序: 
 					</th>
 					<td>

@@ -6,7 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.ForeignKey;
 
 /**
@@ -80,7 +82,35 @@ public class PaymentDiscount extends BaseEntity {
 	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
+	// 保存处理
+	@Override
+	@Transient
+	public void onSave() {
+		if (discount == null || discount.compareTo(new BigDecimal(0)) < 0) {
+			discount = new BigDecimal(0);
+		}
+		if (StringUtils.isEmpty(operator)) {
+			operator = "admin";
+		}
+		if (StringUtils.isEmpty(memo)) {
+			memo = null;
+		}
+	}
 	
+	// 更新处理
+	@Override
+	@Transient
+	public void onUpdate() {
+		if (discount == null || discount.compareTo(new BigDecimal(0)) < 0) {
+			discount = new BigDecimal(0);
+		}
+		if (StringUtils.isEmpty(operator)) {
+			operator = "admin";
+		}
+		if (StringUtils.isEmpty(memo)) {
+			memo = null;
+		}
+	}
 	
 
 }

@@ -15,10 +15,10 @@
 </head>
 <body class="list">
 	<div class="bar">
-		支付方式列表&nbsp;总记录数: ${pager.totalCount} (共${pager.pageCount}页)
+		支付通道列表
 	</div>
 	<div class="body">
-		<form id="listForm" action="payment_config!list.action" method="post">
+		<form id="listForm" action="payment_config!listDiscount.action" method="post">
 			<div class="listBar">
 				<input type="button" class="formButton" onclick="location.href='payment_config!addDiscount.action?paymentConfig.id=${paymentConfig.id}'" value="新增" hidefocus />
 			</div>
@@ -28,19 +28,19 @@
 						<input type="checkbox" class="allCheck" />
 					</th>
 					<th>
-						<a href="#" class="sort" name="name" hidefocus>支付类型</a>
+						<a href="#"  hidefocus>支付类型</a>
 					</th>
 					<th>
-						<a href="#" class="sort" name="orderList" hidefocus>品牌名称</a>
+						<a href="#"  hidefocus>品牌名称</a>
 					</th>
 					<th>
-						<a href="#" class="sort" name="orderList" hidefocus>折扣率</a>
+						<a href="#"  hidefocus>折扣率</a>
 					</th>
 					<th>
-						<a href="#" class="sort" name="orderList" hidefocus>通道编码</a>
+						<a href="#"  hidefocus>通道编码</a>
 					</th>
 					<th>
-						<a href="#" class="sort" name="memo" hidefocus>备注</a>
+						<a href="#"  hidefocus>备注</a>
 					</th>
 					<th>
 						<span>操作</span>

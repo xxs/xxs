@@ -19,14 +19,13 @@
 </head>
 <body class="input">
 	<div class="bar">
-		<#if isAddAction>添加支付方式<#else>编辑支付方式</#if>
+		<#if isAddAction>添加支付通道<#else>编辑支付通道</#if>
 	</div>
 	<div id="validateErrorContainer" class="validateErrorContainer">
 		<div class="validateErrorTitle">以下信息填写有误,请重新填写</div>
 		<ul></ul>
 	</div>
 	<div class="body">
-	<#if isAddAction>payment_config!saveDiscount.action<#else>payment_config!updateDiscount.action</#if>
 		<form id="validateForm" action="<#if isAddAction>payment_config!saveDiscount.action<#else>payment_config!updateDiscount.action</#if>" method="post">
 			<input type="hidden" name="id" value="${id}" />
 			<input type="hidden" name="paymentDiscount.paymentConfig.id" value="${paymentConfig.id}" />

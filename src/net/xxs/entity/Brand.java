@@ -27,8 +27,6 @@ public class Brand extends BaseEntity {
 
 	private String name;// 名称
 	private String logoPath;// LOGO路径
-	private String code;// 通道编码
-	private BigDecimal discount;// 折扣率
 	private String url;// 网址
 	private String introduction;// 介绍
 	private Integer orderList;// 排序
@@ -54,22 +52,6 @@ public class Brand extends BaseEntity {
 		this.logoPath = logoPath;
 	}
 	
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public BigDecimal getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(BigDecimal discount) {
-		this.discount = discount;
-	}
-
 	public String getUrl() {
 		return url;
 	}

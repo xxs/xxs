@@ -204,9 +204,10 @@ public class PaymentConfigAction extends BaseAdminAction {
 		System.out.println(paymentDiscount.getMemo());
 		System.out.println(paymentDiscount.getDiscount());
 		System.out.println(paymentDiscount.getCode());
+		paymentDiscount.setOperator("admin");
 		paymentDiscountService.save(paymentDiscount);
-		System.out.println("id:"+id);
-		redirectUrl = "payment_config!editDiscount.action?id="+id;
+		System.out.println("id:"+paymentDiscount.getPaymentConfig().getId());
+		redirectUrl = "payment_config!editDiscount.action?id="+paymentDiscount.getPaymentConfig().getId();
 		return SUCCESS;
 	}
 	// 更新
@@ -264,8 +265,32 @@ public class PaymentConfigAction extends BaseAdminAction {
 	)
 	@InputConfig(resultName = "error")
 	public String updateDiscount() {
-//		BeanUtils.copyProperties(paymentDiscount, persistent, new String[] {"id", "createDate", "modifyDate", "paymentConfigType", "paymentProductId"});
-//		paymentConfigService.update(persistent);
+		PaymentDiscount persistent = paymentDiscountService.load(id);
+		System.out.println(paymentDiscount.getId());
+		System.out.println(paymentDiscount.getPaymentConfig().getId());
+		System.out.println(paymentDiscount.getBrand().getId());
+		System.out.println(paymentDiscount.getMemo());
+		System.out.println(paymentDiscount.getDiscount());
+		System.out.println(paymentDiscount.getCode());
+		System.out.println(paymentDiscount.getModifyDate());
+		System.out.println("-------------");
+		System.out.println(persistent.getId());
+		System.out.println(persistent.getPaymentConfig().getId());
+		System.out.println(persistent.getBrand().getId());
+		System.out.println(persistent.getMemo());
+		System.out.println(persistent.getDiscount());
+		System.out.println(persistent.getCode());
+		System.out.println(persistent.getModifyDate());
+		BeanUtils.copyProperties(paymentDiscount, persistent, new String[] {"id", "createDate", "modifyDate"});
+		System.out.println("-------------");
+		System.out.println(persistent.getId());
+		System.out.println(persistent.getPaymentConfig().getId());
+		System.out.println(persistent.getBrand().getId());
+		System.out.println(persistent.getMemo());
+		System.out.println(persistent.getDiscount());
+		System.out.println(persistent.getCode());
+		System.out.println(persistent.getModifyDate());
+		paymentDiscountService.update(persistent);
 		redirectUrl = "payment_config!editDiscount.action?id="+paymentDiscount.getPaymentConfig().getId();
 		return SUCCESS;
 	}

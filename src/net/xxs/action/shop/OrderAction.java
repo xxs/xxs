@@ -11,21 +11,23 @@ import net.xxs.bean.Setting;
 import net.xxs.bean.Setting.ScoreType;
 import net.xxs.bean.Setting.StoreFreezeTime;
 import net.xxs.entity.Area;
+import net.xxs.entity.Brand;
 import net.xxs.entity.CartItem;
 import net.xxs.entity.DeliveryType;
+import net.xxs.entity.DeliveryType.DeliveryMethod;
 import net.xxs.entity.Goods;
 import net.xxs.entity.Member;
 import net.xxs.entity.Order;
-import net.xxs.entity.OrderItem;
-import net.xxs.entity.OrderLog;
-import net.xxs.entity.PaymentConfig;
-import net.xxs.entity.Product;
-import net.xxs.entity.Receiver;
-import net.xxs.entity.DeliveryType.DeliveryMethod;
 import net.xxs.entity.Order.OrderStatus;
 import net.xxs.entity.Order.PaymentStatus;
 import net.xxs.entity.Order.ShippingStatus;
+import net.xxs.entity.OrderItem;
+import net.xxs.entity.OrderLog;
 import net.xxs.entity.OrderLog.OrderLogType;
+import net.xxs.entity.PaymentConfig;
+import net.xxs.entity.PaymentDiscount;
+import net.xxs.entity.Product;
+import net.xxs.entity.Receiver;
 import net.xxs.service.AreaService;
 import net.xxs.service.CartItemService;
 import net.xxs.service.DeliveryTypeService;
@@ -33,6 +35,7 @@ import net.xxs.service.OrderItemService;
 import net.xxs.service.OrderLogService;
 import net.xxs.service.OrderService;
 import net.xxs.service.PaymentConfigService;
+import net.xxs.service.PaymentDiscountService;
 import net.xxs.service.ProductService;
 import net.xxs.service.ReceiverService;
 import net.xxs.util.SettingUtil;
@@ -98,6 +101,8 @@ public class OrderAction extends BaseShopAction {
 	private OrderItemService orderItemService;
 	@Resource(name = "productServiceImpl")
 	private ProductService productService;
+	@Resource(name = "paymentDiscountServiceImpl")
+	private PaymentDiscountService paymentDiscountService;
 	
 	// 订单信息
 	@InputConfig(resultName = "error")
@@ -324,9 +329,20 @@ public class OrderAction extends BaseShopAction {
 		BigDecimal paymentFee = null;
 		System.out.println("-------fffffff--");
 		if (deliveryType.getDeliveryMethod() == DeliveryMethod.deliveryAgainstPayment) {
-			paymentConfig = paymentConfigService.load("4028bc743b64ce89013b6524016e0000");
+			paymentConfig = paymentConfigService.load("4028bc743ab4e741013ab538ee9c0006");
 			paymentConfigName = paymentConfig.getName();
 			paymentFee = paymentConfig.getPaymentFee(totalProductPrice.add(deliveryFee));
+			System.out.println("计算前的金额为："+totalProductPrice.toString());
+			//设置totalProductPrice的价格（乘上支付方式中支付通道定义的折扣率）
+			Brand brand = product.getGoods().getBrand();
+			PaymentDiscount paymentDiscount = paymentDiscountService.getPaymentDiscountByPaymentConfigAndBrand(paymentConfig, brand);
+			if(null == paymentDiscount){
+				System.out.println("没有找到相应的通道折扣率配置");
+			}else{
+				totalProductPrice = totalProductPrice.multiply(paymentDiscount.getDiscount());
+			}
+			System.out.println("计算后的金额为："+totalProductPrice.toString());
+			
 		} else {
 			paymentConfig = null;
 			paymentConfigName = "货到付款";
