@@ -3,14 +3,19 @@ package net.xxs.action.admin;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
+import net.xxs.entity.Brand;
 import net.xxs.entity.PaymentConfig;
 import net.xxs.entity.PaymentConfig.PaymentConfigType;
 import net.xxs.entity.PaymentConfig.PaymentFeeType;
+import net.xxs.entity.PaymentDiscount;
 import net.xxs.payment.BasePaymentProduct;
+import net.xxs.service.BrandService;
 import net.xxs.service.PaymentConfigService;
+import net.xxs.service.PaymentDiscountService;
 import net.xxs.util.PaymentProductUtil;
 
 import org.apache.commons.lang.StringUtils;
@@ -33,10 +38,17 @@ public class PaymentConfigAction extends BaseAdminAction {
 	private static final long serialVersionUID = 3562311377613294892L;
 	
 	private PaymentConfig paymentConfig;
+	private PaymentDiscount paymentDiscount;
 	private BasePaymentProduct paymentProduct;
+	private Set<PaymentDiscount> paymentDiscountSet;
+	private List<Brand> brandList;
 	
 	@Resource(name = "paymentConfigServiceImpl")
 	private PaymentConfigService paymentConfigService;
+	@Resource(name = "paymentDiscountServiceImpl")
+	private PaymentDiscountService paymentDiscountService;
+	@Resource(name = "brandServiceImpl")
+	private BrandService brandService;
 	
 	// 列表
 	public String list() {
@@ -76,6 +88,22 @@ public class PaymentConfigAction extends BaseAdminAction {
 		}
 		return INPUT;
 	}
+	// 添加通道
+	@Validations(
+		requiredFields = {
+			@RequiredFieldValidator(fieldName = "paymentConfig.id", message = "支付配置主键不允许为空!")
+		}
+	)
+	@InputConfig(resultName = "error")
+	public String addDiscount() {
+		paymentConfig = paymentConfigService.load(paymentConfig.getId());
+		if (paymentConfig == null) {
+			addActionError("此配置不存在!");
+			return ERROR;
+		}
+		brandList = brandService.getAllList();
+		return "inputDiscount";
+	}	
 	
 	// 编辑
 	public String edit() {
@@ -89,6 +117,33 @@ public class PaymentConfigAction extends BaseAdminAction {
 		}
 		return INPUT;
 	}
+	
+	// 通道管理
+	@Validations(
+		requiredFields = {
+			@RequiredFieldValidator(fieldName = "id", message = "支付配置主键不允许为空!")
+		}
+	)
+	@InputConfig(resultName = "error")
+	public String editDiscount() {
+		paymentConfig = paymentConfigService.load(id);
+		paymentDiscountSet = paymentConfig.getPaymentDiscountSet();
+		return "listDiscount";
+	}	
+	
+	// 编辑通道明细
+	@Validations(
+		requiredFields = {
+			@RequiredFieldValidator(fieldName = "id", message = "支付通道配置主键不允许为空!")
+		}
+	)
+	@InputConfig(resultName = "error")
+	public String editDiscountDetail() {
+		paymentDiscount = paymentDiscountService.load(id);
+		paymentConfig = paymentDiscount.getPaymentConfig();
+		brandList = brandService.getAllList();
+		return "inputDiscount";
+	}	
 	
 	// 保存
 	@Validations(
@@ -133,7 +188,27 @@ public class PaymentConfigAction extends BaseAdminAction {
 		redirectUrl = "payment_config!list.action";
 		return SUCCESS;
 	}
-	
+	// 保存通道
+	@Validations(
+		requiredStrings = {
+			@RequiredStringValidator(fieldName = "paymentDiscount.paymentConfig.id", message = "支付方式主键不允许为空!"),
+			@RequiredStringValidator(fieldName = "paymentDiscount.brand.id", message = "品牌主键不允许为空!"),
+			@RequiredStringValidator(fieldName = "paymentDiscount.code", message = "通道编码不允许为空!")
+			
+		}
+	)
+	@InputConfig(resultName = "error")
+	public String saveDiscount() {
+		System.out.println(paymentDiscount.getPaymentConfig().getId());
+		System.out.println(paymentDiscount.getBrand().getId());
+		System.out.println(paymentDiscount.getMemo());
+		System.out.println(paymentDiscount.getDiscount());
+		System.out.println(paymentDiscount.getCode());
+		paymentDiscountService.save(paymentDiscount);
+		System.out.println("id:"+id);
+		redirectUrl = "payment_config!editDiscount.action?id="+id;
+		return SUCCESS;
+	}
 	// 更新
 	@Validations(
 		requiredStrings = {
@@ -179,7 +254,21 @@ public class PaymentConfigAction extends BaseAdminAction {
 		redirectUrl = "payment_config!list.action";
 		return SUCCESS;
 	}
-	
+	// 更新通道
+	@Validations(
+		requiredStrings = {
+				@RequiredStringValidator(fieldName = "paymentDiscount.paymentConfig.id", message = "支付方式主键不允许为空!"),
+				@RequiredStringValidator(fieldName = "paymentDiscount.brand.id", message = "品牌主键不允许为空!"),
+				@RequiredStringValidator(fieldName = "paymentDiscount.code", message = "通道编码不允许为空!")
+		}
+	)
+	@InputConfig(resultName = "error")
+	public String updateDiscount() {
+//		BeanUtils.copyProperties(paymentDiscount, persistent, new String[] {"id", "createDate", "modifyDate", "paymentConfigType", "paymentProductId"});
+//		paymentConfigService.update(persistent);
+		redirectUrl = "payment_config!editDiscount.action?id="+paymentDiscount.getPaymentConfig().getId();
+		return SUCCESS;
+	}
 	// 获取支付手续费类型集合
 	public List<PaymentFeeType> getPaymentFeeTypeList() {
 		return Arrays.asList(PaymentFeeType.values());
@@ -204,6 +293,30 @@ public class PaymentConfigAction extends BaseAdminAction {
 
 	public void setPaymentProduct(BasePaymentProduct paymentProduct) {
 		this.paymentProduct = paymentProduct;
+	}
+
+	public Set<PaymentDiscount> getPaymentDiscountSet() {
+		return paymentDiscountSet;
+	}
+
+	public void setPaymentDiscountSet(Set<PaymentDiscount> paymentDiscountSet) {
+		this.paymentDiscountSet = paymentDiscountSet;
+	}
+
+	public List<Brand> getBrandList() {
+		return brandList;
+	}
+
+	public void setBrandList(List<Brand> brandList) {
+		this.brandList = brandList;
+	}
+
+	public PaymentDiscount getPaymentDiscount() {
+		return paymentDiscount;
+	}
+
+	public void setPaymentDiscount(PaymentDiscount paymentDiscount) {
+		this.paymentDiscount = paymentDiscount;
 	}
 
 }

@@ -75,6 +75,7 @@
 						</td>
 						<td>
 							<a href="payment_config!edit.action?id=${paymentConfig.id}" title="编辑">[编辑]</a>
+							<a href="payment_config!editDiscount.action?id=${paymentConfig.id}" title="通道管理">[通道管理]</a>
 						</td>
 					</tr>
 				</#list>

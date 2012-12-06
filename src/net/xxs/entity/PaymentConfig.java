@@ -4,11 +4,13 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
@@ -44,6 +46,7 @@ public class PaymentConfig extends BaseEntity {
 	private String description;// 介绍
 	private Integer orderList;// 排序
 	
+	private Set<PaymentDiscount> paymentDiscountSet = new HashSet<PaymentDiscount>();// 费率设置
 	private Set<Order> orderSet = new HashSet<Order>();// 订单
 	private Set<Payment> paymentSet = new HashSet<Payment>();// 支付
 	private Set<Refund> refundSet = new HashSet<Refund>();// 退款
@@ -199,6 +202,15 @@ public class PaymentConfig extends BaseEntity {
 			paymentFee = this.paymentFee;
 		}
 		return SettingUtil.setPriceScale(paymentFee);
+	}
+	@OneToMany(mappedBy = "paymentConfig", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
+	@OrderBy("createDate asc")
+	public Set<PaymentDiscount> getPaymentDiscountSet() {
+		return paymentDiscountSet;
+	}
+
+	public void setPaymentDiscountSet(Set<PaymentDiscount> paymentDiscountSet) {
+		this.paymentDiscountSet = paymentDiscountSet;
 	}
 
 }
