@@ -5,28 +5,29 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.xxs.bean.Setting.StoreFreezeTime;
+import net.xxs.entity.Brand;
 import net.xxs.entity.Deposit;
+import net.xxs.entity.Deposit.DepositType;
 import net.xxs.entity.Member;
 import net.xxs.entity.Order;
-import net.xxs.entity.OrderItem;
-import net.xxs.entity.OrderLog;
-import net.xxs.entity.Payment;
-import net.xxs.entity.PaymentConfig;
-import net.xxs.entity.Product;
-import net.xxs.entity.Deposit.DepositType;
 import net.xxs.entity.Order.OrderStatus;
+import net.xxs.entity.OrderLog;
 import net.xxs.entity.OrderLog.OrderLogType;
+import net.xxs.entity.Payment;
 import net.xxs.entity.Payment.PaymentStatus;
 import net.xxs.entity.Payment.PaymentType;
+import net.xxs.entity.PaymentConfig;
 import net.xxs.entity.PaymentConfig.PaymentConfigType;
+import net.xxs.entity.PaymentDiscount;
 import net.xxs.payment.BasePaymentProduct;
+import net.xxs.service.BrandService;
 import net.xxs.service.CacheService;
 import net.xxs.service.DepositService;
 import net.xxs.service.MemberService;
 import net.xxs.service.OrderLogService;
 import net.xxs.service.OrderService;
 import net.xxs.service.PaymentConfigService;
+import net.xxs.service.PaymentDiscountService;
 import net.xxs.service.PaymentService;
 import net.xxs.service.ProductService;
 import net.xxs.util.PaymentProductUtil;
@@ -82,6 +83,10 @@ public class PaymentAction extends BaseShopAction {
 	private CacheService cacheService;
 	@Resource(name = "memberServiceImpl")
 	private MemberService memberService;
+	@Resource(name = "paymentDiscountServiceImpl")
+	private PaymentDiscountService paymentDiscountService;
+	@Resource(name = "brandServiceImpl")
+	private BrandService brandService;
 	
 	// 支付提交
 	public String submit() {
@@ -204,6 +209,7 @@ public class PaymentAction extends BaseShopAction {
 			deposit.setCredit(new BigDecimal(0));
 			deposit.setDebit(amountPayable);
 			deposit.setBalance(loginMember.getDeposit());
+			deposit.setLossrate(new BigDecimal(0));
 			deposit.setMember(loginMember);
 			depositService.save(deposit);
 			
@@ -362,6 +368,7 @@ public class PaymentAction extends BaseShopAction {
 			deposit.setCredit(totalAmount.subtract(payment.getPaymentFee()));
 			deposit.setDebit(new BigDecimal(0));
 			deposit.setBalance(member.getDeposit());
+			deposit.setLossrate(new BigDecimal(0));
 			deposit.setMember(member);
 			deposit.setPayment(payment);
 			depositService.save(deposit);
@@ -391,17 +398,35 @@ public class PaymentAction extends BaseShopAction {
 			Member member = payment.getMember();
 			System.out.println("提现人为："+member.getUsername());
 			System.out.println("用户提现前的预存款："+member.getDeposit());
-			System.out.println("用户的提现率为："+member.getMemberRank().getLossrate());
-			System.out.println("用户提现实际充值金额为："+totalAmount.multiply(BigDecimal.valueOf(member.getMemberRank().getLossrate())));
-			member.setDeposit(member.getDeposit().add(totalAmount.multiply(BigDecimal.valueOf(member.getMemberRank().getLossrate()))));
+			//System.out.println("用户的提现率为："+member.getMemberRank().getLossrate());
+			//System.out.println("用户提现实际充值金额为："+totalAmount.multiply(BigDecimal.valueOf(member.getMemberRank().getLossrate())));
+			//member.setDeposit(member.getDeposit().add(totalAmount.multiply(BigDecimal.valueOf(member.getMemberRank().getLossrate()))));
+			
+			
+			//设置totalProductPrice的价格（乘上支付方式中支付通道定义的折扣率）
+			Brand brand = brandService.get(order.getBrandId());
+			PaymentDiscount paymentDiscount = paymentDiscountService.getPaymentDiscountByPaymentConfigAndBrand(payment.getPaymentConfig(), brand);
+			System.out.println("订单成功金额为："+totalAmount);
+			if(null == paymentDiscount){
+				System.out.println("没有找到相应的通道折扣率配置");
+			}else{
+				totalAmount = totalAmount.multiply(paymentDiscount.getDiscount());
+				
+			}
+			System.out.println("计算折扣率后的应为会员充值的金额为："+totalAmount);
+			member.setDeposit(member.getDeposit().add(totalAmount));
 			System.out.println("用户提现后的预存款："+member.getDeposit());
 			memberService.update(member);
+			
 			System.out.println("执行了销卡存款");
 			Deposit deposit = new Deposit();
 			deposit.setDepositType(DepositType.memberRecharge);
-			deposit.setCredit(totalAmount.multiply(BigDecimal.valueOf(member.getMemberRank().getLossrate())));
+			deposit.setCredit(totalAmount);
 			deposit.setDebit(new BigDecimal(0));
 			deposit.setBalance(member.getDeposit());
+			System.out.println("正常");
+			deposit.setLossrate(new BigDecimal(0));
+			System.out.println("已经异常了");
 			deposit.setMember(member);
 			deposit.setPayment(payment);
 			depositService.save(deposit);
@@ -411,6 +436,7 @@ public class PaymentAction extends BaseShopAction {
 				System.out.println("推荐人为："+referrerMember.getUsername());
 				System.out.println("推荐人提成前的预存款为："+referrerMember.getDeposit());
 				System.out.println("推荐人提成率为："+referrerMember.getMemberRank().getBenefits());
+				System.out.println("待提成的金额为："+totalAmount);
 				System.out.println("提成的金额为："+totalAmount.multiply(BigDecimal.valueOf(referrerMember.getMemberRank().getBenefits())));
 				referrerMember.setDeposit(referrerMember.getDeposit().add(totalAmount.multiply(BigDecimal.valueOf(referrerMember.getMemberRank().getBenefits()))));
 				memberService.update(referrerMember);
@@ -420,6 +446,9 @@ public class PaymentAction extends BaseShopAction {
 				benefits.setCredit(totalAmount.multiply(BigDecimal.valueOf(referrerMember.getMemberRank().getBenefits())));
 				benefits.setDebit(new BigDecimal(0));
 				benefits.setBalance(referrerMember.getDeposit());
+				deposit.setLossrate(new BigDecimal(0));
+				benefits.setReferrer(member.getUsername());
+				benefits.setOrderSn(order.getOrderSn());
 				benefits.setMember(referrerMember);
 				benefits.setPayment(payment);
 				depositService.save(benefits);
@@ -516,6 +545,7 @@ public class PaymentAction extends BaseShopAction {
 			deposit.setCredit(totalAmount.subtract(payment.getPaymentFee()));
 			deposit.setDebit(new BigDecimal(0));
 			deposit.setBalance(member.getDeposit());
+			deposit.setLossrate(new BigDecimal(0));
 			deposit.setMember(member);
 			deposit.setPayment(payment);
 			depositService.save(deposit);

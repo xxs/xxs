@@ -1,5 +1,7 @@
 package net.xxs.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -24,9 +26,9 @@ public class Withdraw extends BaseEntity {
 	};
 
 	private String withdrawSn; 	//单据号
-	private Double money;		//金额
-	private Double lossrate;	//手续费率
-	private Double totalMoney;	//实际提现金额
+	private BigDecimal money;		//金额
+	private BigDecimal lossrate;	//手续费率
+	private BigDecimal totalMoney;	//实际提现金额
 	private String message;		//备注
 	private String memo;		//留言
 	private String rememo;		//回复
@@ -54,29 +56,29 @@ public class Withdraw extends BaseEntity {
 	}
 
 	@Column(nullable = false)
-	public Double getMoney() {
+	public BigDecimal getMoney() {
 		return money;
 	}
 
-	public void setMoney(Double money) {
+	public void setMoney(BigDecimal money) {
 		this.money = money;
 	}
 
 	@Column(nullable = false)
-	public Double getLossrate() {
+	public BigDecimal getLossrate() {
 		return lossrate;
 	}
 
-	public void setLossrate(Double lossrate) {
+	public void setLossrate(BigDecimal lossrate) {
 		this.lossrate = lossrate;
 	}
 
 	@Column(nullable = false)
-	public Double getTotalMoney() {
+	public BigDecimal getTotalMoney() {
 		return totalMoney;
 	}
 
-	public void setTotalMoney(Double totalMoney) {
+	public void setTotalMoney(BigDecimal totalMoney) {
 		this.totalMoney = totalMoney;
 	}
 

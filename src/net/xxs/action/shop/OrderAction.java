@@ -101,8 +101,6 @@ public class OrderAction extends BaseShopAction {
 	private OrderItemService orderItemService;
 	@Resource(name = "productServiceImpl")
 	private ProductService productService;
-	@Resource(name = "paymentDiscountServiceImpl")
-	private PaymentDiscountService paymentDiscountService;
 	
 	// 订单信息
 	@InputConfig(resultName = "error")
@@ -333,15 +331,15 @@ public class OrderAction extends BaseShopAction {
 			paymentConfigName = paymentConfig.getName();
 			paymentFee = paymentConfig.getPaymentFee(totalProductPrice.add(deliveryFee));
 			System.out.println("计算前的金额为："+totalProductPrice.toString());
-			//设置totalProductPrice的价格（乘上支付方式中支付通道定义的折扣率）
-			Brand brand = product.getGoods().getBrand();
-			PaymentDiscount paymentDiscount = paymentDiscountService.getPaymentDiscountByPaymentConfigAndBrand(paymentConfig, brand);
-			if(null == paymentDiscount){
-				System.out.println("没有找到相应的通道折扣率配置");
-			}else{
-				totalProductPrice = totalProductPrice.multiply(paymentDiscount.getDiscount());
-			}
-			System.out.println("计算后的金额为："+totalProductPrice.toString());
+//			//设置totalProductPrice的价格（乘上支付方式中支付通道定义的折扣率）
+//			Brand brand = product.getGoods().getBrand();
+//			PaymentDiscount paymentDiscount = paymentDiscountService.getPaymentDiscountByPaymentConfigAndBrand(paymentConfig, brand);
+//			if(null == paymentDiscount){
+//				System.out.println("没有找到相应的通道折扣率配置");
+//			}else{
+//				totalProductPrice = totalProductPrice.multiply(paymentDiscount.getDiscount());
+//			}
+//			System.out.println("计算后的金额为："+totalProductPrice.toString());
 			
 		} else {
 			paymentConfig = null;
@@ -350,8 +348,9 @@ public class OrderAction extends BaseShopAction {
 		}
 		System.out.println("----------");
 		BigDecimal totalAmount = totalProductPrice.add(deliveryFee).add(paymentFee);
-		
+		Brand brand = product.getGoods().getBrand();//为order准备brandId
 		order = new Order();
+		order.setBrandId(brand.getId());//此列不能为空
 		order.setOrderStatus(OrderStatus.unprocessed);
 		order.setPaymentStatus(PaymentStatus.unpaid);
 		order.setShippingStatus(ShippingStatus.unshipped);

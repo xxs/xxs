@@ -281,7 +281,7 @@ public class PaymentConfigAction extends BaseAdminAction {
 		System.out.println(persistent.getDiscount());
 		System.out.println(persistent.getCode());
 		System.out.println(persistent.getModifyDate());
-		BeanUtils.copyProperties(paymentDiscount, persistent, new String[] {"id", "createDate", "modifyDate"});
+		BeanUtils.copyProperties(paymentDiscount, persistent, new String[] {"id", "createDate"});
 		System.out.println("-------------");
 		System.out.println(persistent.getId());
 		System.out.println(persistent.getPaymentConfig().getId());

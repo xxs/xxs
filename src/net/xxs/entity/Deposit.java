@@ -32,6 +32,9 @@ public class Deposit extends BaseEntity {
 	private BigDecimal credit;// 存入金额
 	private BigDecimal debit;// 支出金额
 	private BigDecimal balance;// 当前余额
+	private BigDecimal lossrate;// 手续费率 (只有提现单涉及)
+	private String referrer;// 被推荐人名字 (只有提现单涉及，记录预存款来源)
+	private String orderSn;// 被推荐人操作的订单号 (只有提现单涉及，记录预存款来源)
 	
 	private Member member;// 会员
 	private Payment payment;// 收款
@@ -64,7 +67,32 @@ public class Deposit extends BaseEntity {
 	public void setDebit(BigDecimal debit) {
 		this.debit = SettingUtil.setPriceScale(debit);
 	}
-	
+	@Column(updatable = false)	
+	public String getReferrer() {
+		return referrer;
+	}
+
+	public void setReferrer(String referrer) {
+		this.referrer = referrer;
+	}
+	@Column(updatable = false)
+	public String getOrderSn() {
+		return orderSn;
+	}
+
+	public void setOrderSn(String orderSn) {
+		this.orderSn = orderSn;
+	}
+
+	@Column(updatable = false)
+	public BigDecimal getLossrate() {
+		return lossrate;
+	}
+
+	public void setLossrate(BigDecimal lossrate) {
+		this.lossrate = lossrate;
+	}
+
 	@Column(nullable = false, updatable = false)
 	public BigDecimal getBalance() {
 		return balance;

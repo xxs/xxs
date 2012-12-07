@@ -1,11 +1,14 @@
 package net.xxs.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import net.xxs.bean.Pager;
 import net.xxs.dao.WithdrawDao;
 import net.xxs.entity.Member;
 import net.xxs.entity.Withdraw;
+import net.xxs.entity.Withdraw.WithdrawStatus;
 import net.xxs.service.WithdrawService;
 
 import org.springframework.stereotype.Service;
@@ -39,6 +42,10 @@ public class WithdrawServiceImpl extends BaseServiceImpl<Withdraw, String> imple
 	@Transactional(readOnly = true)
 	public Long getUnprocessedWithdrawCount() {
 		return withdrawDao.getUnprocessedWithdrawCount();
+	}
+
+	public List<Withdraw> getUnprocessedWithdrawList(Member member,WithdrawStatus status) {
+		return withdrawDao.getUnprocessedWithdrawList(member,status);
 	}
 
 }

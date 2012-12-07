@@ -49,6 +49,7 @@ public class Order extends BaseEntity {
 	};
 
 	private String orderSn;// 订单编号
+	private String brandId;// 品牌编号（为获取通道及费率单独添加）
 	private OrderStatus orderStatus;// 订单状态
 	private PaymentStatus paymentStatus;// 支付状态
 	private ShippingStatus shippingStatus;// 发货状态
@@ -227,7 +228,14 @@ public class Order extends BaseEntity {
 	public void setShipAddress(String shipAddress) {
 		this.shipAddress = shipAddress;
 	}
+	@Column(nullable = false)
+	public String getBrandId() {
+		return brandId;
+	}
 
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
 	@Column(nullable = false)
 	public String getShipZipCode() {
 		return shipZipCode;

@@ -1,5 +1,8 @@
 package net.xxs.action.shop;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import net.xxs.entity.Withdraw;
@@ -40,6 +43,11 @@ public class WithdrawAction extends BaseShopAction {
 	// 保存
 	@InputConfig(resultName = "error")
 	public String save() {
+		List<Withdraw> withdrawList = withdrawService.getUnprocessedWithdrawList(getLoginMember(), WithdrawStatus.apply);
+		if(null != withdrawList&&withdrawList.size()>0){
+			addActionError("已有提现单在申请中！");
+			return ERROR;
+		}
 //		if (StringUtils.isEmpty(withdraw.getPhone()) && StringUtils.isEmpty(receiver.getMobile())) {
 //			addActionError("联系电话、联系手机必须填写其中一项!");
 //			return ERROR;
@@ -57,11 +65,11 @@ public class WithdrawAction extends BaseShopAction {
 //		}
 		withdraw.setWithdrawSn(SerialNumberUtil.buildWithdrawSn());
 		withdraw.setMoney(withdraw.getMoney());
-		withdraw.setTotalMoney(withdraw.getMoney()*getLoginMember().getMemberRank().getLossrate());
+		withdraw.setTotalMoney(withdraw.getMoney().multiply(BigDecimal.valueOf(getLoginMember().getMemberRank().getLossrate())));
 		withdraw.setMessage("会员自主提现");
 		withdraw.setRememo(null);
 		withdraw.setWithdrawStatus(WithdrawStatus.apply);
-		withdraw.setLossrate(getLoginMember().getMemberRank().getLossrate());
+		withdraw.setLossrate(BigDecimal.valueOf(getLoginMember().getMemberRank().getLossrate()));
 		withdraw.setMember(getLoginMember());
 		withdraw.setMemo(withdraw.getMemo());
 		withdrawService.save(withdraw);

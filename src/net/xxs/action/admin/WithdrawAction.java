@@ -52,10 +52,9 @@ public class WithdrawAction extends BaseAdminAction {
 		} else if (withdraw.getWithdrawStatus() == WithdrawStatus.lose) {
 			return ajax(Status.error, "此单已作废!");
 		} else {
-			Member member = withdraw.getMember();
-			BigDecimal totalmoney = BigDecimal.valueOf(withdraw.getMoney()*member.getMemberRank().getLossrate());
 			//修改会员预存款操作
-			BigDecimal newDeposit =  member.getDeposit().subtract(totalmoney);
+			Member member = withdraw.getMember();
+			BigDecimal newDeposit =  member.getDeposit().subtract(withdraw.getMoney());
 			if(Double.parseDouble(newDeposit.toString())<0){
 				return ajax(Status.error, "用户预存款余额不足，不能提现!");
 			}
@@ -65,7 +64,8 @@ public class WithdrawAction extends BaseAdminAction {
 			Deposit deposit = new Deposit();
 			deposit.setDepositType(DepositType.memberWithdraw);
 			deposit.setCredit(new BigDecimal(0));
-			deposit.setDebit(totalmoney);
+			deposit.setDebit(withdraw.getMoney());
+			deposit.setLossrate(withdraw.getLossrate());//保存交易时的手续费率
 			deposit.setBalance(newDeposit);
 			deposit.setMember(member);
 			depositService.save(deposit);
