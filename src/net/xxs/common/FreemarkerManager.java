@@ -14,6 +14,7 @@ import net.xxs.directive.GoodsListDirective;
 import net.xxs.directive.InstantMessagingListDirective;
 import net.xxs.directive.NavigationListDirective;
 import net.xxs.directive.PaginationDirective;
+import net.xxs.directive.PaymentDiscountListDirective;
 import net.xxs.directive.SubstringMethod;
 import net.xxs.util.SpringUtil;
 import freemarker.template.TemplateException;
@@ -31,6 +32,7 @@ public class FreemarkerManager extends org.apache.struts2.views.freemarker.Freem
 			PaginationDirective paginationDirective = (PaginationDirective) SpringUtil.getBean("paginationDirective");
 			CommentListDirective commentListDirective = (CommentListDirective) SpringUtil.getBean("commentListDirective");
 			NavigationListDirective navigationListDirective = (NavigationListDirective) SpringUtil.getBean("navigationListDirective");
+			PaymentDiscountListDirective paymentDiscountListDirective = (PaymentDiscountListDirective) SpringUtil.getBean("paymentDiscountListDirective");
 			FriendLinkListDirective friendLinkListDirective = (FriendLinkListDirective) SpringUtil.getBean("friendLinkListDirective");
 			InstantMessagingListDirective instantMessagingListDirective = (InstantMessagingListDirective) SpringUtil.getBean("instantMessagingListDirective");
 			ArticleCategoryListDirective articleCategoryListDirective = (ArticleCategoryListDirective) SpringUtil.getBean("articleCategoryListDirective");
@@ -45,6 +47,7 @@ public class FreemarkerManager extends org.apache.struts2.views.freemarker.Freem
 			config.setSharedVariable(PaginationDirective.TAG_NAME, paginationDirective);
 			config.setSharedVariable(CommentListDirective.TAG_NAME, commentListDirective);
 			config.setSharedVariable(NavigationListDirective.TAG_NAME, navigationListDirective);
+			config.setSharedVariable(PaymentDiscountListDirective.TAG_NAME, paymentDiscountListDirective);
 			config.setSharedVariable(FriendLinkListDirective.TAG_NAME, friendLinkListDirective);
 			config.setSharedVariable(InstantMessagingListDirective.TAG_NAME, instantMessagingListDirective);
 			config.setSharedVariable(ArticleCategoryListDirective.TAG_NAME, articleCategoryListDirective);

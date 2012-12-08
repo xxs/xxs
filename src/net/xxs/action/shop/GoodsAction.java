@@ -10,10 +10,12 @@ import net.xxs.bean.Pager.Order;
 import net.xxs.entity.Brand;
 import net.xxs.entity.GoodsAttribute;
 import net.xxs.entity.GoodsCategory;
+import net.xxs.entity.PaymentConfig;
 import net.xxs.service.BrandService;
 import net.xxs.service.GoodsAttributeService;
 import net.xxs.service.GoodsCategoryService;
 import net.xxs.service.GoodsService;
+import net.xxs.service.PaymentConfigService;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.InterceptorRef;
@@ -54,7 +56,8 @@ public class GoodsAction extends BaseShopAction {
 	private BrandService brandService;
 	@Resource(name = "goodsAttributeServiceImpl")
 	private GoodsAttributeService goodsAttributeService;
-
+	@Resource(name = "paymentConfigServiceImpl")
+	private PaymentConfigService paymentConfigService;
 	@Validations(
 		requiredStrings = {
 			@RequiredStringValidator(fieldName = "sign", message = "参数错误!")
@@ -202,5 +205,8 @@ public class GoodsAction extends BaseShopAction {
 	public void setPathList(List<GoodsCategory> pathList) {
 		this.pathList = pathList;
 	}
-	
+	// 获取所有支付方式集合
+	public List<PaymentConfig> getAllPaymentConfigList() {
+		return paymentConfigService.getAllList();
+	}
 }

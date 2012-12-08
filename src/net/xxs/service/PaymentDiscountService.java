@@ -17,4 +17,10 @@ public interface PaymentDiscountService extends BaseService<PaymentDiscount, Str
 	 * @return 支付配置
 	 */
 	public PaymentDiscount getPaymentDiscountByPaymentConfigAndBrand(PaymentConfig paymentConfig , Brand brand);
+	/**
+	 * 获取非预存款类型的支付配置list
+	 * 
+	 * @return 支付配置list
+	 */
+	public List<PaymentDiscount> getPaymentDiscountByBrand(Brand brand);
 }

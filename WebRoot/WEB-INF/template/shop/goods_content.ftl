@@ -74,9 +74,20 @@
 									${specification.name}:
 												<#list specification.specificationValueList as specificationValue>
 															<input type="radio" name="1"/>${specificationValue.name}
+															<#if (specificationValue_index+1)%5 == 0>
+																<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															</#if>
 												</#list>
 								</#if>
 							</#list>
+		               	</p>
+		               	<p>
+		               		支付通道：
+		               		   <@paymentDiscount_list brandId="${goods.brand.id}"; paymentDiscountList>
+								<#list paymentDiscountList as paymentDiscount>
+									<input type="radio" name="2"/>通道${paymentDiscount_index+1} (折扣率：${paymentDiscount.discount})
+								</#list>
+							   </@paymentDiscount_list>
 		               	</p>
 		               <p>账号：<input type="text"/></p>
 		               <p>密码：<input type="text"/></p>

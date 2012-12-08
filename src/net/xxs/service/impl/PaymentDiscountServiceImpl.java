@@ -1,5 +1,7 @@
 package net.xxs.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import net.xxs.dao.PaymentDiscountDao;
@@ -29,6 +31,10 @@ public class PaymentDiscountServiceImpl extends BaseServiceImpl<PaymentDiscount,
 	public PaymentDiscount getPaymentDiscountByPaymentConfigAndBrand(
 			PaymentConfig paymentConfig, Brand brand) {
 		return paymentDiscountDao.getPaymentDiscountByPaymentConfigAndBrand(paymentConfig, brand);
+	}
+	@Transactional(readOnly = true)
+	public List<PaymentDiscount> getPaymentDiscountByBrand(Brand brand) {
+		return paymentDiscountDao.getPaymentDiscountByBrand(brand);
 	}
 
 }
