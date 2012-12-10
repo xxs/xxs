@@ -44,6 +44,6 @@ public interface WithdrawService extends BaseService<Withdraw, String> {
 	 *            
 	 * @return 未处理
 	 */
-	public List<Withdraw> getUnprocessedWithdrawList(Member member,WithdrawStatus status);
+	public List<Withdraw> getApplyWithdrawList(Member member);
 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import net.xxs.bean.Pager;
 import net.xxs.entity.Member;
 import net.xxs.entity.Withdraw;
-import net.xxs.entity.Withdraw.WithdrawStatus;
 
 /**
  * Dao接口 - 提现
@@ -44,5 +43,5 @@ public interface WithdrawDao extends BaseDao<Withdraw, String> {
 	 *            
 	 * @return 未处理
 	 */
-	public List<Withdraw> getUnprocessedWithdrawList(Member member,WithdrawStatus status);
+	public List<Withdraw> getApplyWithdrawList(Member member);
 }

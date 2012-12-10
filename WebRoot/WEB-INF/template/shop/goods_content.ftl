@@ -68,7 +68,45 @@
 		         <dl class="tabs_type_2">
 		            <dt class="current">单张支付</dt>
 		            <dd class="current">
+		            <form method="post" action="">
+		            	<input type="text" name="" value="" />
+		            	<input type="text" name="" value="" />
+		            	<input type="text" name="" value="" />
 		               <p>
+		               <#if goods.isSpecificationEnabled>
+						<#assign specificationValueSet = goods.specificationValueSet>
+			               <#list goods.specificationSet as specification>
+									<#if specification.specificationType == "text">
+										${specification.name}:
+													<#list specification.specificationValueList as specificationValue>
+														<#if specificationValueSet.contains(specificationValue)>
+															<input type="radio" name="1"/>${specificationValue.name}
+														</#if>
+													</#list>
+									</#if>
+								</#list>
+						</#if>
+		               	</p>
+		               	<p>
+		               		支付通道：
+		               		   <@paymentDiscount_list brandId="${goods.brand.id}"; paymentDiscountList>
+								<#list paymentDiscountList as paymentDiscount>
+									<input type="radio" name="paymentConfig.id" value="${paymentDiscount.paymentConfig.id}"/>通道${paymentDiscount_index+1} (折扣率：${paymentDiscount.discount})
+								</#list>
+							   </@paymentDiscount_list>
+		               	</p>
+		               <p>账号：<input type="text" name="cardNum"/></p>
+		               <p>密码：<input type="text" name="cardPwd"/></p>
+		               <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="small green button" target="_self"> 确认提交 </a> <input type="submit" value="提交" />
+		               <a href="#" class="small white button" target="_self"> 重新填写 </a>	
+		               </p>
+		               </form>
+		            </dd>
+		            
+		            
+		            <dt>多张同面额</dt>
+		            <dd>
+		            		               <p>
 		               <#list goods.specificationSet as specification>
 								<#if specification.specificationType == "text">
 									${specification.name}:
@@ -89,16 +127,6 @@
 								</#list>
 							   </@paymentDiscount_list>
 		               	</p>
-		               <p>账号：<input type="text"/></p>
-		               <p>密码：<input type="text"/></p>
-		               <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="small green button" target="_self"> 确认提交 </a>
-		               <a href="#" class="small white button" target="_self"> 重新填写 </a>	
-		               </p>
-		            </dd>
-		            
-		            
-		            <dt>多张同面额</dt>
-		            <dd>
 		               <p>每行卡信息支持格式为：“卡号,密码,金额” 或者 “卡号 密码 金额”</p>
 		               <p>例如：11925110103023132,111387516814561221 或者 11925110103023132 111387516814561221</p>
 		               <p><textarea name="comments" cols="40" rows="3" id="comments"></textarea></p>
@@ -109,6 +137,27 @@
 		            
 		            <dt>多张不同面额</dt>
 		            <dd>
+		            		               <p>
+		               <#list goods.specificationSet as specification>
+								<#if specification.specificationType == "text">
+									${specification.name}:
+												<#list specification.specificationValueList as specificationValue>
+															<input type="radio" name="1"/>${specificationValue.name}
+															<#if (specificationValue_index+1)%5 == 0>
+																<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															</#if>
+												</#list>
+								</#if>
+							</#list>
+		               	</p>
+		               	<p>
+		               		支付通道：
+		               		   <@paymentDiscount_list brandId="${goods.brand.id}"; paymentDiscountList>
+								<#list paymentDiscountList as paymentDiscount>
+									<input type="radio" name="2"/>通道${paymentDiscount_index+1} (折扣率：${paymentDiscount.discount})
+								</#list>
+							   </@paymentDiscount_list>
+		               	</p>
 		               <p>每行卡信息支持格式为：“卡号,密码,金额” 或者 “卡号 密码 金额”</p>
 		               <p>例如：11925110103023132,111387516814561221,10 或者 11925110103023132 111387516814561221 10</p>
 		               <p><textarea name="comments" cols="40" rows="3" id="comments"></textarea></p>

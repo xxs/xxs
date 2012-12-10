@@ -44,8 +44,8 @@ public class WithdrawServiceImpl extends BaseServiceImpl<Withdraw, String> imple
 		return withdrawDao.getUnprocessedWithdrawCount();
 	}
 
-	public List<Withdraw> getUnprocessedWithdrawList(Member member,WithdrawStatus status) {
-		return withdrawDao.getUnprocessedWithdrawList(member,status);
+	public List<Withdraw> getApplyWithdrawList(Member member) {
+		return withdrawDao.getApplyWithdrawList(member);
 	}
 
 }

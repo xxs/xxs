@@ -547,6 +547,14 @@ public class MemberAction extends BaseShopAction {
 		addActionMessage("密码修改成功!");
 		return SUCCESS;
 	}
+	// 会员注册页面
+	public String memberreg() throws Exception {
+		System.out.println("跳转会员注册页面");
+		if(null != id && !id.isEmpty()){
+			member = memberService.get(id);
+		}
+		return "reg";
+	}
 
 	public Member getMember() {
 		return member;

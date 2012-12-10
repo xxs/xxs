@@ -23,6 +23,7 @@
                      <li><a href="page-template-sitemap.html">Sitemap</a></li>
                      <li><a href="${base}/shop/member_center!index.action" id="headerMemberCenter">会员中心</a></li>
                      <li><a href="javascript: void(0);" id="headerShowRegisterWindow">注册</a></li>
+                     <li><a href="${base}/shop/member!memberreg.action?id=8a9182e13ab73c9e013ab74780e80000">注册页面</a></li>
                      <li><a href="${base}/shop/member!logout.action" id="headerLogout">[退出]</a></li>
                   </ul>
                </div>

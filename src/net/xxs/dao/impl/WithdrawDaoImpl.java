@@ -38,10 +38,9 @@ public class WithdrawDaoImpl extends BaseDaoImpl<Withdraw, String> implements Wi
 		return (Long) getSession().createQuery(hql).setParameter("withdrawStatus", WithdrawStatus.apply).uniqueResult();
 	}
 	@SuppressWarnings("unchecked")
-	public List<Withdraw> getUnprocessedWithdrawList(Member member,
-			WithdrawStatus status) {
-		String hql = "from Withdraw as withdraw where withdraw.withdrawStatus = :status and withdraw.member :member order by withdraw.createDate desc";
-		return getSession().createQuery(hql).setParameter("status", status).setParameter("member", member).list();
+	public List<Withdraw> getApplyWithdrawList(Member member) {
+		String hql = "from Withdraw as withdraw where withdraw.withdrawStatus = :status and withdraw.member = :member order by withdraw.createDate desc";
+		return getSession().createQuery(hql).setParameter("status", WithdrawStatus.apply).setParameter("member", member).list();
 	}
 	
 }

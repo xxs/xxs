@@ -29,6 +29,7 @@ public class WithdrawAction extends BaseShopAction {
 
 	private static final long serialVersionUID = 7391785904288731356L;
 	private Withdraw withdraw;
+	private List<Withdraw> withdrawList;
 	
 	@Resource(name = "withdrawServiceImpl")
 	private WithdrawService withdrawService;
@@ -37,15 +38,17 @@ public class WithdrawAction extends BaseShopAction {
 	public String list() {
 		System.out.println("zou list......");
 		pager = withdrawService.getWithdeawPager(getLoginMember(), pager);
+		withdrawList = withdrawService.getApplyWithdrawList(getLoginMember());
+		System.out.println(withdrawList.size());
 		return LIST;
 	}
 	
 	// 保存
 	@InputConfig(resultName = "error")
 	public String save() {
-		List<Withdraw> withdrawList = withdrawService.getUnprocessedWithdrawList(getLoginMember(), WithdrawStatus.apply);
+		withdrawList = withdrawService.getApplyWithdrawList(getLoginMember());
 		if(null != withdrawList&&withdrawList.size()>0){
-			addActionError("已有提现单在申请中！");
+			addActionError("已有提现单在申请中！请等待管理员审核后再增加新提现！");
 			return ERROR;
 		}
 //		if (StringUtils.isEmpty(withdraw.getPhone()) && StringUtils.isEmpty(receiver.getMobile())) {
@@ -84,5 +87,12 @@ public class WithdrawAction extends BaseShopAction {
 	public void setWithdraw(Withdraw withdraw) {
 		this.withdraw = withdraw;
 	}
-	
+
+	public List<Withdraw> getWithdrawList() {
+		return withdrawList;
+	}
+
+	public void setWithdrawList(List<Withdraw> withdrawList) {
+		this.withdrawList = withdrawList;
+	}
 }

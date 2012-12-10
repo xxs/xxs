@@ -25,7 +25,6 @@ import net.xxs.entity.OrderItem;
 import net.xxs.entity.OrderLog;
 import net.xxs.entity.OrderLog.OrderLogType;
 import net.xxs.entity.PaymentConfig;
-import net.xxs.entity.PaymentDiscount;
 import net.xxs.entity.Product;
 import net.xxs.entity.Receiver;
 import net.xxs.service.AreaService;
@@ -35,7 +34,6 @@ import net.xxs.service.OrderItemService;
 import net.xxs.service.OrderLogService;
 import net.xxs.service.OrderService;
 import net.xxs.service.PaymentConfigService;
-import net.xxs.service.PaymentDiscountService;
 import net.xxs.service.ProductService;
 import net.xxs.service.ReceiverService;
 import net.xxs.util.SettingUtil;
@@ -327,7 +325,7 @@ public class OrderAction extends BaseShopAction {
 		BigDecimal paymentFee = null;
 		System.out.println("-------fffffff--");
 		if (deliveryType.getDeliveryMethod() == DeliveryMethod.deliveryAgainstPayment) {
-			paymentConfig = paymentConfigService.load("4028bc743ab4e741013ab538ee9c0006");
+			paymentConfig = paymentConfigService.load(paymentConfig.getId());
 			paymentConfigName = paymentConfig.getName();
 			paymentFee = paymentConfig.getPaymentFee(totalProductPrice.add(deliveryFee));
 			System.out.println("计算前的金额为："+totalProductPrice.toString());
