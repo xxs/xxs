@@ -56,6 +56,9 @@
 						<a href="#" class="sort" name="name" hidefocus>名称</a>
 					</th>
 					<th>
+						<a href="#" class="sort" name="isDefault" hidefocus>是否为推荐/默认</a>
+					</th>
+					<th>
 						<a href="#" class="sort" name="orderList" hidefocus>排序</a>
 					</th>
 					<th>
@@ -69,6 +72,9 @@
 						</td>
 						<td>
 							${paymentConfig.name}
+						</td>
+						<td>
+							<#if paymentConfig.isDefault>是<#else>否</#if>
 						</td>
 						<td>
 							${paymentConfig.orderList}

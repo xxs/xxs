@@ -23,7 +23,7 @@ public class PaymentDiscountDaoImpl extends BaseDaoImpl<PaymentDiscount, String>
 	}
 	@SuppressWarnings("unchecked")
 	public List<PaymentDiscount> getPaymentDiscountByBrand(Brand brand) {
-		String hql = "from PaymentDiscount as paymentDiscount where paymentDiscount.brand.id = :brandid";
+		String hql = "from PaymentDiscount as paymentDiscount where paymentDiscount.brand.id = :brandid order by paymentDiscount.paymentConfig.orderList";
 		return getSession().createQuery(hql).setParameter("brandid", brand.getId()).list();
 	}
 

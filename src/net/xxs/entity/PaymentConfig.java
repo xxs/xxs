@@ -43,6 +43,7 @@ public class PaymentConfig extends BaseEntity {
 	private String bargainorKey;// 商户私钥
 	private PaymentFeeType paymentFeeType;// 支付手续费类型
 	private BigDecimal paymentFee;// 支付费用
+	private Boolean isDefault;// 是否默认
 	private String description;// 介绍
 	private Integer orderList;// 排序
 	
@@ -171,6 +172,9 @@ public class PaymentConfig extends BaseEntity {
 		if (StringUtils.isEmpty(description)) {
 			description = null;
 		}
+		if (isDefault == null) {
+			isDefault = false;
+		}
 	}
 	
 	// 更新处理
@@ -185,6 +189,9 @@ public class PaymentConfig extends BaseEntity {
 		}
 		if (StringUtils.isEmpty(description)) {
 			description = null;
+		}
+		if (isDefault == null) {
+			isDefault = false;
 		}
 	}
 	
@@ -212,5 +219,12 @@ public class PaymentConfig extends BaseEntity {
 	public void setPaymentDiscountSet(Set<PaymentDiscount> paymentDiscountSet) {
 		this.paymentDiscountSet = paymentDiscountSet;
 	}
+	@Column(nullable = false)
+	public Boolean getIsDefault() {
+		return isDefault;
+	}
 
+	public void setIsDefault(Boolean isDefault) {
+		this.isDefault = isDefault;
+	}
 }

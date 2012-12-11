@@ -140,6 +140,15 @@ $().ready(function() {
 						<label class="requireField">*</label>
 					</td>
 				</tr>
+				</tr>
+					<th>
+						是否为推荐/默认：
+					</th>
+					<td>
+						<@checkbox name="paymentConfig.isDefault" value="${(paymentConfig.isDefault)!false}" />选中为推荐/默认
+						<label class="requireField">*</label>
+					</td>
+				</tr>
 				<tr>
 					<th>
 						排序: 
