@@ -90,7 +90,7 @@
 		               		支付通道：
 		               		   <@paymentDiscount_list brandId="${goods.brand.id}"; paymentDiscountList>
 								<#list paymentDiscountList as paymentDiscount>
-									<input type="radio" name="paymentConfig.id" value="${paymentDiscount.paymentConfig.id}" <#if paymentDiscount.paymentConfig.isDefault>checked="checked"</#if> />通道${paymentDiscount_index+1} (折扣率：${paymentDiscount.discount} <#if paymentDiscount.paymentConfig.isDefault><span style="color:red;">推荐</span></#if>)
+									<input type="radio" name="paymentConfig.id" value="${paymentDiscount.paymentConfig.id}" <#if paymentDiscount.paymentConfig.isEnabled!=true >disabled</#if> <#if paymentDiscount.paymentConfig.isDefault>checked="checked"</#if> />通道${paymentDiscount_index+1} (折扣率：${paymentDiscount.discount} <#if paymentDiscount.paymentConfig.isDefault><span style="color:red;">推荐</span></#if>)
 								</#list>
 							   </@paymentDiscount_list>
 		               	</p>

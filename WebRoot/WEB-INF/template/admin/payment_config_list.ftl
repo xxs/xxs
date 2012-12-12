@@ -59,6 +59,9 @@
 						<a href="#" class="sort" name="isDefault" hidefocus>是否为推荐/默认</a>
 					</th>
 					<th>
+						<a href="#" class="sort" name="isEnabled" hidefocus>是否可用</a>
+					</th>
+					<th>
 						<a href="#" class="sort" name="orderList" hidefocus>排序</a>
 					</th>
 					<th>
@@ -75,6 +78,9 @@
 						</td>
 						<td>
 							<#if paymentConfig.isDefault>是<#else>否</#if>
+						</td>
+						<td>
+							<#if paymentConfig.isEnabled>是<#else>否</#if>
 						</td>
 						<td>
 							${paymentConfig.orderList}

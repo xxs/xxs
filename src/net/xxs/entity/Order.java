@@ -75,6 +75,8 @@ public class Order extends BaseEntity {
 	private DeliveryType deliveryType;// 配送方式
 	private PaymentConfig paymentConfig;// 支付方式
 	
+	private String payStatus;//记录支付过程中的状态码
+	
 	private Set<OrderItem> orderItemSet = new HashSet<OrderItem>();// 订单项
 	private Set<OrderLog> orderLogSet = new HashSet<OrderLog>();// 订单日志
 	private Set<Payment> paymentSet = new HashSet<Payment>();// 收款
@@ -243,6 +245,14 @@ public class Order extends BaseEntity {
 
 	public void setShipZipCode(String shipZipCode) {
 		this.shipZipCode = shipZipCode;
+	}
+	@Column(length = 100)
+	public String getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
 	}
 
 	public String getShipPhone() {

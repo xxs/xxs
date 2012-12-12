@@ -21,7 +21,7 @@ import com.yeepay.DigestUtil;
 public class OfPay extends BasePaymentProduct {
 
 	// public static final String PAYMENT_URL ="https://www.yeepay.com/app-merchant-proxy/node";// 支付请求URL
-	public static final String PAYMENT_URL ="https://www.yeepay.com/app-merchant-proxy/command.action";// 正式支付请求URL
+	public static final String PAYMENT_URL ="http://card.pay.ofpay.com/rcvcard.do";// 正式支付请求URL
 	//public static final String PAYMENT_URL = "http://tech.yeepay.com:8080/robot/debug.action";// 测试支付请求 
 	public static final String RETURN_URL = ":8080/shop/payment!payreturn.action";// 回调处理URL
 	public static final String NOTIFY_URL = ":8080/shop/payment!paynotify.action";// 消息通知URL
@@ -173,7 +173,7 @@ public class OfPay extends BasePaymentProduct {
 
 	@Override
 	public String getPayreturnMessage(String paymentSn) {
-		return "SUCCESS<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /><title>页面跳转中..</title></head><body onload=\"javascript: document.forms[0].submit();\"><form action=\""
+		return "ok<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /><title>页面跳转中..</title></head><body onload=\"javascript: document.forms[0].submit();\"><form action=\""
 				+ SettingUtil.getSetting().getShopUrl()
 				+ RESULT_URL
 				+ "\"><input type=\"hidden\" name=\"paymentsn\" value=\""

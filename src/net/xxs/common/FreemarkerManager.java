@@ -15,6 +15,7 @@ import net.xxs.directive.InstantMessagingListDirective;
 import net.xxs.directive.NavigationListDirective;
 import net.xxs.directive.PaginationDirective;
 import net.xxs.directive.PaymentDiscountListDirective;
+import net.xxs.directive.PaymentResultMethod;
 import net.xxs.directive.SubstringMethod;
 import net.xxs.util.SpringUtil;
 import freemarker.template.TemplateException;
@@ -28,6 +29,7 @@ public class FreemarkerManager extends org.apache.struts2.views.freemarker.Freem
 			// config.setTemplateExceptionHandler(TemplateExceptionHandler.IGNORE_HANDLER);
 			
 			SubstringMethod substringMethod = (SubstringMethod) SpringUtil.getBean("substringMethod");
+			PaymentResultMethod paymentResultMethod = (PaymentResultMethod) SpringUtil.getBean("paymentResultMethod");
 			CheckboxDirective checkboxDirective = (CheckboxDirective) SpringUtil.getBean("checkboxDirective");
 			PaginationDirective paginationDirective = (PaginationDirective) SpringUtil.getBean("paginationDirective");
 			CommentListDirective commentListDirective = (CommentListDirective) SpringUtil.getBean("commentListDirective");
@@ -42,6 +44,7 @@ public class FreemarkerManager extends org.apache.struts2.views.freemarker.Freem
 			GoodsCategoryTreeDirective goodsCategoryTreeDirective = (GoodsCategoryTreeDirective) SpringUtil.getBean("goodsCategoryTreeDirective");
 			GoodsListDirective goodsListDirective = (GoodsListDirective) SpringUtil.getBean("goodsListDirective");
 			
+			config.setSharedVariable(PaymentResultMethod.TAG_NAME, paymentResultMethod);
 			config.setSharedVariable(SubstringMethod.TAG_NAME, substringMethod);
 			config.setSharedVariable(CheckboxDirective.TAG_NAME, checkboxDirective);
 			config.setSharedVariable(PaginationDirective.TAG_NAME, paginationDirective);

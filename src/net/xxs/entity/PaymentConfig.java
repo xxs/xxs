@@ -44,6 +44,7 @@ public class PaymentConfig extends BaseEntity {
 	private PaymentFeeType paymentFeeType;// 支付手续费类型
 	private BigDecimal paymentFee;// 支付费用
 	private Boolean isDefault;// 是否默认
+	private Boolean isEnabled;// 是否可用
 	private String description;// 介绍
 	private Integer orderList;// 排序
 	
@@ -175,6 +176,9 @@ public class PaymentConfig extends BaseEntity {
 		if (isDefault == null) {
 			isDefault = false;
 		}
+		if (isEnabled == null) {
+			isEnabled = true;
+		}
 	}
 	
 	// 更新处理
@@ -192,6 +196,9 @@ public class PaymentConfig extends BaseEntity {
 		}
 		if (isDefault == null) {
 			isDefault = false;
+		}
+		if (isEnabled == null) {
+			isEnabled = true;
 		}
 	}
 	
@@ -227,4 +234,14 @@ public class PaymentConfig extends BaseEntity {
 	public void setIsDefault(Boolean isDefault) {
 		this.isDefault = isDefault;
 	}
+	@Column(nullable = false)
+	public Boolean getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(Boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+	
+	
 }
