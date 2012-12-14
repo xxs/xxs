@@ -308,6 +308,11 @@ public class PaymentAction extends BaseShopAction {
 		}
 		return NONE;
 	}
+	//查询支付订单结果
+	public String query(){
+		
+		return null;
+	}
 	
 	// 支付回调处理
 	@Validations(

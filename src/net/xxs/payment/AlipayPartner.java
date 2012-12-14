@@ -229,4 +229,9 @@ public class AlipayPartner extends BasePaymentProduct {
 		return "success";
 	}
 
+	@Override
+	public String getQueryUrl() {
+		return null;
+	}
+
 }

@@ -20,9 +20,8 @@ import com.yeepay.DigestUtil;
 
 public class OfPay extends BasePaymentProduct {
 
-	// public static final String PAYMENT_URL ="https://www.yeepay.com/app-merchant-proxy/node";// 支付请求URL
 	public static final String PAYMENT_URL ="http://card.pay.ofpay.com/rcvcard.do";// 正式支付请求URL
-	//public static final String PAYMENT_URL = "http://tech.yeepay.com:8080/robot/debug.action";// 测试支付请求 
+	public static final String QUERY_URL ="http://card.pay.ofpay.com/querycard.do";// 正式查询请求URL
 	public static final String RETURN_URL = ":8080/shop/payment!payreturn.action";// 回调处理URL
 	public static final String NOTIFY_URL = ":8080/shop/payment!paynotify.action";// 消息通知URL
 	public static final String SHOW_URL = "/";// 商品显示URL
@@ -63,8 +62,8 @@ public class OfPay extends BasePaymentProduct {
 		if (httpServletRequest == null) {
 			return false;
 		}
-		String r1Code = httpServletRequest.getParameter("r1_Code");
-		if (StringUtils.equals(r1Code, "1")) {
+		String result = httpServletRequest.getParameter("result");
+		if (StringUtils.equals(result, "2000")||StringUtils.equals(result, "2011")) {
 			return true;
 		} else {
 			return false;
@@ -183,6 +182,11 @@ public class OfPay extends BasePaymentProduct {
 	@Override
 	public String getPaynotifyMessage() {
 		return null;
+	}
+
+	@Override
+	public String getQueryUrl() {
+		return QUERY_URL;
 	}
 
 }

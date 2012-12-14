@@ -185,4 +185,9 @@ public class YeepayForZY extends BasePaymentProduct {
 		return null;
 	}
 
+	@Override
+	public String getQueryUrl() {
+		return null;
+	}
+
 }

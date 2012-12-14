@@ -183,4 +183,9 @@ public class TenpayPartner extends BasePaymentProduct {
 		return null;
 	}
 
+	@Override
+	public String getQueryUrl() {
+		return null;
+	}
+
 }

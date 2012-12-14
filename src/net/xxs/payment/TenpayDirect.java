@@ -186,4 +186,9 @@ public class TenpayDirect extends BasePaymentProduct {
 		return bargainorId + dateString + paymentSn;
 	}
 
+	@Override
+	public String getQueryUrl() {
+		return null;
+	}
+
 }

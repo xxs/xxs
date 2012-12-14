@@ -184,5 +184,10 @@ public class Pay99bill extends BasePaymentProduct {
 	public String getPayreturnMessage(String paymentSn) {
 		return "<result>1</result><redirecturl>" + SettingUtil.getSetting().getShopUrl() + RESULT_URL + "?paymentsn=" + paymentSn + "</redirecturl>";
 	}
+
+	@Override
+	public String getQueryUrl() {
+		return null;
+	}
 	
 }

@@ -118,6 +118,46 @@
 					</td>
 				</tr>
 			</table>
+			<div class="blank"></div>
+			<table class="listTable">
+				<tr>
+					<th colspan="2">
+						待处理事务
+					</th>
+				</tr>
+				<tr>
+					<td width="110">
+						未处理订单: 
+					</td>
+					<td>
+						${unprocessedOrderCount} <a href="order!list.action">[订单列表]</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						未处理提现申请数: 
+					</td>
+					<td>
+						${unprocessedWithdrawCount} <a href="withdraw!list.action">[提现申请]</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						会员总数: 
+					</td>
+					<td>
+						${memberTotalCount}  人
+					</td>
+				</tr>
+				<tr>
+					<td>
+						文章总数: 
+					</td>
+					<td>
+						${articleTotalCount}  篇
+					</td>
+				</tr>
+			</table>
 		</div>
 		<div class="bodyRight">
 			<table class="listTable">

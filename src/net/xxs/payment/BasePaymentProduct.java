@@ -34,6 +34,13 @@ public abstract class BasePaymentProduct {
 	public abstract String getPaymentUrl();
 	
 	/**
+	 * 获取查询请求URL
+	 * 
+	 * @return 查询URL
+	 */
+	public abstract String getQueryUrl();
+	
+	/**
 	 * 获取支付编号
 	 * 
 	 * @param httpServletRequest

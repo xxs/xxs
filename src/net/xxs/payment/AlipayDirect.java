@@ -205,5 +205,10 @@ public class AlipayDirect extends BasePaymentProduct {
 	public String getPaynotifyMessage() {
 		return "success";
 	}
+
+	@Override
+	public String getQueryUrl() {
+		return null;
+	}
 	
 }

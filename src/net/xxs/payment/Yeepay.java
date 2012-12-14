@@ -220,4 +220,9 @@ public class Yeepay extends BasePaymentProduct {
 		return null;
 	}
 
+	@Override
+	public String getQueryUrl() {
+		return null;
+	}
+
 }
