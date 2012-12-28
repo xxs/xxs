@@ -3,7 +3,7 @@
   type="WEB"
   name="xxs"
   id="myeclipse.1352858148890"
-  context-root="/ROOT"
+  context-root="/xxs"
   j2ee-spec="5.0"
   archive="xxs.war">
   <attributes>
