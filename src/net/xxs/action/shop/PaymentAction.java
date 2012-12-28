@@ -451,7 +451,7 @@ public class PaymentAction extends BaseShopAction {
 				benefits.setCredit(totalAmount.multiply(BigDecimal.valueOf(referrerMember.getMemberRank().getBenefits())));
 				benefits.setDebit(new BigDecimal(0));
 				benefits.setBalance(referrerMember.getDeposit());
-				deposit.setLossrate(new BigDecimal(0));
+				benefits.setLossrate(new BigDecimal(0));
 				benefits.setReferrer(member.getUsername());
 				benefits.setOrderSn(order.getOrderSn());
 				benefits.setMember(referrerMember);
