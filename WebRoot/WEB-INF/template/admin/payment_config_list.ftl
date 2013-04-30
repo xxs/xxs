@@ -56,12 +56,6 @@
 						<a href="#" class="sort" name="name" hidefocus>名称</a>
 					</th>
 					<th>
-						<a href="#" class="sort" name="isDefault" hidefocus>是否为推荐/默认</a>
-					</th>
-					<th>
-						<a href="#" class="sort" name="isEnabled" hidefocus>是否可用</a>
-					</th>
-					<th>
 						<a href="#" class="sort" name="orderList" hidefocus>排序</a>
 					</th>
 					<th>
@@ -77,17 +71,10 @@
 							${paymentConfig.name}
 						</td>
 						<td>
-							<#if paymentConfig.isDefault>是<#else>否</#if>
-						</td>
-						<td>
-							<#if paymentConfig.isEnabled>是<#else>否</#if>
-						</td>
-						<td>
 							${paymentConfig.orderList}
 						</td>
 						<td>
 							<a href="payment_config!edit.action?id=${paymentConfig.id}" title="编辑">[编辑]</a>
-							<a href="payment_config!editDiscount.action?id=${paymentConfig.id}" title="通道管理">[通道管理]</a>
 						</td>
 					</tr>
 				</#list>

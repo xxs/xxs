@@ -62,6 +62,12 @@
 						<a href="#" class="sort" name="logoPath" hidefocus>LOGO</a>
 					</th>
 					<th>
+						<a href="#" class="sort" name="code" hidefocus>通道编码</a>
+					</th>
+					<th>
+						<a href="#" class="sort" name="discount" hidefocus>折扣率</a>
+					</th>
+					<th>
 						<a href="#" class="sort" name="orderList" hidefocus>排序</a>
 					</th>
 					<th>
@@ -87,6 +93,12 @@
 							<#else>
 								-
 							</#if>
+						</td>
+						<td>
+							${brand.code}
+						</td>
+						<td>
+							${brand.discount}
 						</td>
 						<td>
 							${brand.orderList}

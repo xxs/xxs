@@ -14,165 +14,385 @@
 <!--[if lte IE 6]>
 	<script type="text/javascript" src="${base}/template/common/js/belatedPNG.js"></script>
 	<script type="text/javascript">
+		// 解决IE6透明PNG图片BUG
 		DD_belatedPNG.fix(".belatedPNG");
 	</script>
 <![endif]-->
-<#include "/WEB-INF/template/shop/head.ftl">
 </head>
 <body id="goodsContent" class="goodsContent">
 	<#include "/WEB-INF/template/shop/header.ftl">
-	<!-- START small_banner -->
-      <section class="small_banner">
-         <div class="center-wrap">
-            <p class="page-banner-heading">会员中心首页</p>
-            <p class="page-banner-description">This area is super easy to customize. It can include a search bar, custom text or absolutely nothing at all.</p>
-            
-            <div class="breadcrumbs">
-            
-            <a href="${base}/" class="shop"><span class="icon">&nbsp;</span>首页</a> &gt;
+	<div class="body">
+		<div class="bodyLeft">
+			<div class="goodsCategory">
+            	<div class="top">商品分类</div>
+            	<div class="middle">
+            		<ul id="goodsCategoryMenu" class="menu">
+            			<@goods_category_tree; goodsCategoryTree>
+	            			<#list goodsCategoryTree as firstGoodsCategory>
+	            				<li class="mainCategory">
+									<a href="${base}${firstGoodsCategory.url}">${firstGoodsCategory.name}</a>
+								</li>
+								<#if (firstGoodsCategory.children?? && firstGoodsCategory.children?size > 0)>
+									<#list firstGoodsCategory.children as secondGoodsCategory>
+										<li>
+											<a href="${base}${secondGoodsCategory.url}">
+												<span class="icon">&nbsp;</span>${secondGoodsCategory.name}
+											</a>
+										</li>
+										<#if secondGoodsCategory_index + 1 == 5>
+											<#break />
+										</#if>
+									</#list>
+								</#if>
+								<#if firstGoodsCategory_index + 1 == 3>
+									<#break />
+								</#if>
+	            			</#list>
+	            		</@goods_category_tree>
+					</ul>
+            	</div>
+                <div class="bottom"></div>
+			</div>
+			<div class="blank"></div>
+			<div class="hotGoods">
+				<div class="top">热销排行</div>
+				<div class="middle">
+					<ul>
+						<@goods_list goods_category_id=goods.goodsCategory.id type="hot" count=10; goodsList>
+							<#list goodsList as goods>
+								<li class="number${goods_index + 1}">
+									<span class="icon">&nbsp;</span>
+									<a href="${base}${goods.htmlPath}" title="${goods.name}">${substring(goods.name, 24, "...")}</a>
+								</li>
+							</#list>
+						</@goods_list>
+					</ul>
+				</div>
+				<div class="bottom"></div>
+			</div>
+			<div class="blank"></div>
+			<div id="goodsHistory" class="goodsHistory">
+				<div class="top">浏览记录</div>
+				<div class="middle">
+					<ul id="goodsHistoryListDetail"></ul>
+				</div>
+				<div class="bottom"></div>
+			</div>
+		</div>
+		<div class="bodyRight">
+			<div class="listBar">
+				<div class="left"></div>
+				<div class="middle">
+					<div class="path">
+						<a href="${base}/" class="shop"><span class="icon">&nbsp;</span>首页</a> &gt;
 						<#list pathList as path>
 							<a href="${base}${path.url}">${path.name}</a> &gt;
 						</#list>
-            </div>
-            <!-- END breadcrumbs -->
-         </div>
-         <!-- END center-wrap -->
-         
-         <div class="shadow top"></div>
-         <div class="shadow bottom"></div>
-         <div class="tt-overlay"></div>
-      </section>
-      
-	<section id="content-container" class="clearfix">
-         <div id="main-wrap" class="clearfix">
-            <aside class="subnav_cont sidebar">
-               <div class="subnav">
-                  <ul>
-                     <@goods_list type="hot" count=10; goodsList>
-									<#if (goodsList?size > 0)>
-										<#list goodsList as goods>
-											<li><a href="${base}${goods.htmlPath}"><span>${substring(goods.name, 24, "...")}   &rarr;   点击卖卡</span></a></li>		
+					</div>
+				</div>
+				<div class="right"></div>
+			</div>
+			<div class="blank"></div>
+			<div class="goodsTop">
+				<div class="goodsTopLeft">
+					<div class="goodsImage">
+						<#if goods.goodsImageList??>
+		                	<#list goods.goodsImageList as goodsImage>
+		                		<a href="${base}${goodsImage.bigImagePath}" class="tabContent zoom<#if (goodsImage_index > 0)> nonFirst</#if>">
+									<img src="${base}${goodsImage.smallImagePath}" alt="点击放大" />
+								</a>
+							</#list>
+						<#else>
+	            			<a href="${base}${setting.defaultBigGoodsImagePath}" class="zoom">
+								<img src="${base}${setting.defaultSmallGoodsImagePath}" alt="点击放大" />
+							</a>
+	                	</#if>
+                	</div>
+					<div class="thumbnailGoodsImage">
+						<a class="prev browse" href="javascript: void(0);" hidefocus></a>
+						<div id="thumbnailGoodsImageScrollable" class="scrollable">
+							<ul id="goodsImageTab" class="items goodsImageTab">
+								<#if goods.goodsImageList??>
+									<#list goods.goodsImageList as goodsImage>
+										<li><img src="${base}${goodsImage.thumbnailImagePath}" alt="${goodsImage.description}" /></li>
+									</#list>
+								<#else>
+									<li><img src="${base}${setting.defaultThumbnailGoodsImagePath}" /></li>
+	                        	</#if>
+							</ul>
+						</div>
+						<a class="next browse" href="javascript: void(0);" hidefocus></a>
+					</div>
+				</div>
+				<form action="order!saveCard.action" method="post">
+				<div class="goodsTopRight">
+					<h1 class="title">${substring(goods.name, 50, "...")}</h1>
+					<ul class="goodsAttribute">
+						<li>商品编号: ${goods.goodsSn}</li>
+						<li>货品编号: <span id="productSn">${goods.defaultProduct.productSn}</span><input type="text" name="productId" value="${goods.defaultProduct.id}" /></li>
+						<#list (goods.goodsType.goodsAttributeSet)! as goodsAttribute>
+							<#if goods.getGoodsAttributeValue(goodsAttribute)?? && goods.getGoodsAttributeValue(goodsAttribute) != "">
+	                    		<li>${goodsAttribute.name}: ${substring(goods.getGoodsAttributeValue(goodsAttribute), 26)}</li>
+							</#if>
+						</#list>
+					</ul>
+					<div class="blank"></div>
+					<div class="goodsPrice">
+						<div class="left"></div>
+						<div class="right">
+							<div class="top">
+								销 售 价:
+								<span id="price" class="price">${goods.price?string(currencyFormat)}</span>
+							</div>
+							<div class="bottom">
+								市 场 价:
+								<#if setting.isShowMarketPrice>
+									<span id="marketPrice" class="marketPrice">${goods.marketPrice?string(currencyFormat)}</span>
+								<#else>
+									-
+								</#if>
+							</div>
+						</div>
+					</div>
+					<div class="blank"></div>
+					
+					<table id="buyInfo" class="buyInfo">
+						<#if goods.isSpecificationEnabled>
+							<#assign specificationValueSet = goods.specificationValueSet>
+							<tr class="specificationTips">
+								<th id="tipsTitle">请选择:</th>
+								<td>
+									<div id="tipsContent" class="tipsContent">
+										<#list goods.specificationSet as specification>
+											${specification.name} 
 										</#list>
-									</#if>
-								</@goods_list>
-                  </ul>
-               </div>
-               <!-- END subnav -->
-            </aside>
-            <div class="page_content_right sub-content">
-               <h4>${substring(goods.name, 50, "...")} <a href="/shop/order!saveCard.action?productId=${goods.id}">点击提交</a> </h4>
-               <p>商品编号: ${goods.goodsSn}</p>
-               <p>product编号: <span id="productSn">${goods.defaultProduct.id}</span></p>
-               <div class="hr hr-dotted-double">&nbsp;</div>
-            <div class="page_content_right sub-content">
-                 <!-- START tabs_type_2 --> 
-		         <dl class="tabs_type_2">
-		            <dt class="current">单张支付</dt>
-		            <dd class="current">
-		            <form method="post" action="/shop/order!saveCard.action">
-		            	<input type="text" name="productId" value="${goods.defaultProduct.id}" />
-		               <p>
-		               <#if goods.isSpecificationEnabled>
-						<#assign specificationValueSet = goods.specificationValueSet>
-			               <#list goods.specificationSet as specification>
-									<#if specification.specificationType == "text">
-										${specification.name}:
-													<#list specification.specificationValueList as specificationValue>
-														<#if specificationValueSet.contains(specificationValue)>
-															<input type="radio" name="1"/>${specificationValue.name}
-														</#if>
-													</#list>
-									</#if>
-								</#list>
+									</div>
+									<div id="closeHighlight" class="closeHighlight" title="关闭"></div>
+								</td>
+							</tr>
+							<#list goods.specificationSet as specification>
+								<#if specification.specificationType == "text">
+									<tr class="text">
+										<th>${specification.name}:</th>
+										<td>
+											<ul>
+												<#list specification.specificationValueList as specificationValue>
+													<#if specificationValueSet.contains(specificationValue)>
+														<li class="${specificationValue.id}" title="${specificationValue.name}" specificationValueId="${specificationValue.id}">
+															${specificationValue.name}qq
+															<span title="点击取消选择"></span>
+														</li>
+													</#if>
+												</#list>
+											</ul>
+										</td>
+									</tr>
+								<#else>
+									<tr class="image">
+										<th>${specification.name}:</th>
+										<td>
+											<ul>
+												<#list specification.specificationValueList as specificationValue>
+													<#if specificationValueSet.contains(specificationValue)>
+														<li class="${specificationValue.id}" title="${specificationValue.name}" specificationValueId="${specificationValue.id}">
+															<#if specificationValue.imagePath??>
+																<img src="${base}${specificationValue.imagePath}" alt="${specificationValue.name}" />
+															<#else>
+																<img src="${base}/template/shop/images/default_specification.gif" />
+															</#if>
+															<span title="点击取消选择"></span>
+														</li>
+													</#if>
+												</#list>
+											</ul>
+										</td>
+									</tr>
+								</#if>
+							</#list>
 						</#if>
-		               	</p>
-		               	<p>
-		               		支付通道：
-		               		   <@paymentDiscount_list brandId="${goods.brand.id}"; paymentDiscountList>
-								<#list paymentDiscountList as paymentDiscount>
-									<input type="radio" name="paymentConfig.id" value="${paymentDiscount.paymentConfig.id}" <#if paymentDiscount.paymentConfig.isEnabled!=true >disabled</#if> <#if paymentDiscount.paymentConfig.isDefault>checked="checked"</#if> />通道${paymentDiscount_index+1} (折扣率：${paymentDiscount.discount} <#if paymentDiscount.paymentConfig.isDefault><span style="color:red;">推荐</span></#if>)
-								</#list>
-							   </@paymentDiscount_list>
-		               	</p>
-		               <p>账号：<input type="text" name="cardNum"/></p>
-		               <p>密码：<input type="text" name="cardPwd"/></p>
-		               <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="small green button" target="_self"> 确认提交 </a> <input type="submit" value="提交" />
-		               <a href="#" class="small white button" target="_self"> 重新填写 </a>	
-		               </p>
-		               </form>
-		            </dd>
-		            
-		            
-		            <dt>多张同面额</dt>
-		            <dd>
-		            		               <p>
-		               <#list goods.specificationSet as specification>
-								<#if specification.specificationType == "text">
-									${specification.name}:
-												<#list specification.specificationValueList as specificationValue>
-															<input type="radio" name="1"/>${specificationValue.name}
-															<#if (specificationValue_index+1)%5 == 0>
-																<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															</#if>
-												</#list>
+						<tr>
+							<th>购买数量:</th>
+							<td>
+								<input type="text" id="quantity" value="1" />
+								<#if setting.scoreType == "goodsSet" && goods.score != 0>
+									&nbsp;&nbsp;( 所得积分: ${goods.score} )
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<th>确认金额:</th>
+							<td>
+								<span id="price1" class="price">${goods.price?string(currencyFormat)}</span>
+							</td>
+						</tr>
+						<tr>
+							<th>支付方式:</th>
+							<td>
+								<input type="radio" name="222" />单张支付
+								<input type="radio" name="222" />多张支付
+							</td>
+						</tr>
+						<tr>
+							<th>卡号组合:</th>
+							<td>
+								<input type="text"  />
+								
+							</td>
+						</tr>
+						<tr>
+							<th>密码组合:</th>
+							<td>
+								<input type="text" />
+								
+							</td>
+						</tr>
+						<tr>
+							<th>支付途径:</th>
+							<td>
+								<input type="radio" name="444" />易宝支付<input type="text" name="paymentConfig.id" value="4028bc743ab4e741013ab538ee9c0006" />
+								<input type="radio" name="444" />拉卡支付
+							</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>
+								<input type="submit" value="生成订单" />
+							</td>
+						</tr>
+						<tr>
+							<th>&nbsp;</th>
+							<td>
+								<#if !goods.isSpecificationEnabled && goods.isOutOfStock>
+									<input type="button" id="goodsButton" class="goodsNotifyButton" value="" hidefocus />
+								<#else>
+									<input type="button" id="goodsButton" class="addCartItemButton" value="" hidefocus />
+								</#if>
+								 
+								 <input type="button" id="addFavorite" class="addFavoriteButton" goodsId="${goods.id}" hidefocus />
+							</td>
+						</tr>
+					</table>
+					</form>
+				</div>
+			</div>
+			<div class="blank"></div>
+			<div class="goodsBottom">
+				<ul id="goodsParameterTab" class="goodsParameterTab">
+					<li>
+						<a href="javascript: void(0);" class="current" hidefocus>商品介绍</a>
+					</li>
+					<li>
+						<a href="javascript: void(0);" name="goodsAttribute" hidefocus>商品参数</a>
+					</li>
+					<#if setting.isCommentEnabled>
+						<li>
+							<a href="javascript: void(0);" hidefocus>商品评论</a>
+						</li>
+					</#if>
+				</ul>
+				<div class="tabContent goodsIntroduction">
+					${goods.introduction}
+				</div>
+				<div class="tabContent goodsAttribute">
+					<table class="goodsParameterTable">
+						<#list (goods.goodsType.goodsParameterList)! as goodsParameter>
+							<#if goods.goodsParameterValueMap.get(goodsParameter.id)?? && goods.goodsParameterValueMap.get(goodsParameter.id) != "">
+								<tr>
+									<th>
+										${goodsParameter.name}
+									</th>
+									<td>
+										${(goods.goodsParameterValueMap.get(goodsParameter.id))!}
+									</td>
+								</tr>
+							</#if>
+						</#list>
+					</table>
+				</div>
+				<#if setting.isCommentEnabled>
+					<div id="comment" class="tabContent comment">
+						<@comment_list goods_id=goods.id count=5; commentList>
+							<#list commentList as comment>
+								<#assign isHasComment = true />
+								<div class="commentItem" id="commentItem${comment.id}">
+									<p><span class="red">${(comment.username)!"游客"}</span> ${comment.createDate?string("yyyy-MM-dd HH: mm")} <a href="#commentForm" class="commentReply" forCommentId="${comment.id}">[回复此评论]</a></p>
+									<p><pre>${comment.content}</pre></p>
+									<#list comment.replyCommentSet as replyComment>
+										<#if replyComment.isShow>
+											<div class="reply">
+												<p><span class="red"><#if replyComment.isAdminReply>管理员<#else>${(replyComment.username)!"游客"}</#if></span> ${replyComment.createDate?string("yyyy-MM-dd HH: mm")}</p>
+												<p><pre>${replyComment.content}</pre></p>
+											</div>
+										</#if>
+									</#list>
+								</div>
+								<#if comment_has_next>
+									<div class="blank"></div>
 								</#if>
 							</#list>
-		               	</p>
-		               	<p >
-		               		支付通道：
-		               		   <@paymentDiscount_list brandId="${goods.brand.id}"; paymentDiscountList>
-								<#list paymentDiscountList as paymentDiscount>
-									<input type="radio" name="paymentConfig.id" value="${paymentDiscount.paymentConfig.id}" <#if paymentDiscount.paymentConfig.isDefault>checked="checked"</#if> />通道${paymentDiscount_index+1} (折扣率：${paymentDiscount.discount} <#if paymentDiscount.paymentConfig.isDefault><span style="color:red;">推荐</span></#if>)
-								</#list>
-							   </@paymentDiscount_list>
-		               	</p>
-		               <p>每行卡信息支持格式为：“卡号,密码,金额” 或者 “卡号 密码 金额”</p>
-		               <p>例如：11925110103023132,111387516814561221 或者 11925110103023132 111387516814561221</p>
-		               <p><textarea name="comments" cols="40" rows="3" id="comments"></textarea></p>
-		               <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="small green button" target="_self"> 确认提交 </a>
-		               <a href="#" class="small white button" target="_self"> 重新填写 </a>	
-		               </p>
-		            </dd>
-		            
-		            <dt>多张不同面额</dt>
-		            <dd>
-		            		               <p>
-		               <#list goods.specificationSet as specification>
-								<#if specification.specificationType == "text">
-									${specification.name}:
-												<#list specification.specificationValueList as specificationValue>
-															<input type="radio" name="1"/>${specificationValue.name}
-															<#if (specificationValue_index+1)%5 == 0>
-																<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															</#if>
-												</#list>
-								</#if>
-							</#list>
-		               	</p>
-		               	<p>
-		               		支付通道：
-		               		   <@paymentDiscount_list brandId="${goods.brand.id}"; paymentDiscountList>
-								<#list paymentDiscountList as paymentDiscount>
-									<input type="radio" name="paymentConfig.id" value="${paymentDiscount.paymentConfig.id}" <#if paymentDiscount.paymentConfig.isDefault>checked="checked"</#if> />通道${paymentDiscount_index+1} (折扣率：${paymentDiscount.discount} <#if paymentDiscount.paymentConfig.isDefault><span style="color:red;">推荐</span></#if>)
-								</#list>
-							   </@paymentDiscount_list>
-		               	</p>
-		               <p>每行卡信息支持格式为：“卡号,密码,金额” 或者 “卡号 密码 金额”</p>
-		               <p>例如：11925110103023132,111387516814561221,10 或者 11925110103023132 111387516814561221 10</p>
-		               <p><textarea name="comments" cols="40" rows="3" id="comments"></textarea></p>
-		               <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="small green button" target="_self"> 确认提交 </a>
-		               <a href="#" class="small white button" target="_self"> 重新填写 </a>	
-		               </p>
-		            </dd>
-		            
-		         </dl>
-		         <!-- END tabs_type_2 --> 
-            </div>
-            <!-- END of page_content-->
-         </div>
-         <!-- END main-wrap -->
-      </section>
-      <!-- END content-container -->
+							<#if (commentList?size > 0)>
+								<div class="info">
+									<a href="${base}/shop/comment_list/${goods.id}.htm">查看所有评论&gt;&gt;</a>
+								</div>
+							</#if>
+						</@comment_list>
+						<form id="commentForm" name="commentForm" method="post">
+							<input type="hidden" name="comment.goods.id" value="${goods.id}" />
+							<input type="hidden" id="forCommentId" name="forCommentId" />
+							<table class="sendTable">
+								<tr class="title">
+									<td width="100">
+										<span id="sendTitle">发表评论</span>
+									</td>
+									<td>
+										<a href="javascript: void(0);" id="sendComment" class="sendComment">切换到发表新评论&gt;&gt;</a>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										评论内容: 
+									</th>
+									<td>
+										<textarea id="commentContent" name="comment.content" class="formTextarea"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										联系方式: 
+									</th>
+									<td>
+										<input type="text" name="comment.contact" class="formText" />
+									</td>
+								</tr>
+								<#if setting.isCommentCaptchaEnabled>
+									<tr>
+					                	<th>
+					                		验证码: 
+					                	</th>
+					                    <td>
+					                    	<input type="text" id="commentCaptcha" name="j_captcha" class="formText captcha" />
+					                    	<img id="commentCaptchaImage" class="captchaImage" src="${base}/captcha.jpeg" alt="换一张" />
+					                    </td>
+					                </tr>
+				                </#if>
+								<tr>
+									<th>
+										&nbsp;
+									</th>
+									<td>
+										<input type="submit" class="formButton" value="提交评论" />
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</#if>
+			</div>
+		</div>
+		<div class="blank"></div>
+		<#include "/WEB-INF/template/shop/friend_link.ftl">
+	</div>
+	<div class="blank"></div>
 	<#include "/WEB-INF/template/shop/footer.ftl">
 	<script type="text/javascript" src="${base}/template/common/js/jquery.js"></script>
 	<script type="text/javascript" src="${base}/template/common/js/jquery.tools.js"></script>
@@ -348,11 +568,5 @@
 	
 	})
 	</script>
-	
-	
-	 <script type="text/javascript" src="${base}/template/xxs/js/custom-main.js"></script>
-      <script type="text/javascript" src="${base}/template/xxs/js/jquery.prettyPhoto.js"></script>
-      <script type="text/javascript" src="${base}/template/xxs/js/jquery.cycle.all.min.js"></script>
-      <script type="text/javascript" src="${base}/template/xxs/js/jquery.easing.1.3.js"></script>
 </body>
 </html>
